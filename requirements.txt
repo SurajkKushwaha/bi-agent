@@ -1,0 +1,15 @@
+langchain
+langchain-groq
+langgraph-checkpoint-sqlite
+pandas
+duckdb
+openpyxl
+python-dotenv
+pyyaml
+streamlit
+
+# first setp is to run this file to install these requirements, then run the check_setup.py file to check if everything is working fine.    
+
+# pip install -r requirements.txt
+
+# agent ka tools se connecttion in an optimized way (one-many relationhsips) ->mcp

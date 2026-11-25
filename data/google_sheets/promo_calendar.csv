@@ -1,0 +1,11 @@
+campaign_id,campaign_name,start_date,end_date,channel,category,region,discount_pct,spend
+CMP01,New Year Home Refresh,2018-01-02,2018-01-20,Email,housewares,All,10,12000
+CMP02,Carnival Beauty Week,2018-02-05,2018-02-14,Instagram,health_beauty,All,12,15000
+CMP03,Back to Work Tech,15/03/2018,2018-03-31,Google Ads,computers_accessories,Southeast,8,18000
+CMP04,Mother's Day Gifts,2018-04-25,2018-05-13,Instagram,fashion_bags,All,15,22000
+CMP05,Northeast Electronics Fest,2018-05-01,2018-05-31,TV + Instagram,electronics,Northeast,15,40000
+CMP06,World Cup Sports Deals,2018-06-10,2018-07-15,Google Ads,sports_leisure,All,10,25000
+CMP06,World Cup Sports Deals,2018-06-10,2018-07-15,Google Ads,sports_leisure,All,10,25000
+CMP07,Winter Sports Sale,2018-07-16,2018-08-20,Email,sports_leisure,South,12,14000
+CMP08,Father's Day Tech,2018-07-25,2018-08-12,Instagram,electronics,All,10,20000
+CMP09,Kids Day Toys Preview,2018-09-15,2018-10-12,Email,toys,All,10,9000

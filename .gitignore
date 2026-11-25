@@ -1,0 +1,6 @@
+.env
+venv/
+__pycache__/
+data/warehouse.duckdb
+chats.json
+memory.db

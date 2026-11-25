@@ -1,0 +1,11 @@
+# ConsoleFlare theme for the BI Agent
+[theme]
+base = "dark"
+primaryColor = "#7833fe"
+backgroundColor = "#0d0f12"
+secondaryBackgroundColor = "#1a1a1a"
+textColor = "#ffffff"
+font = "sans serif"
+
+[client]
+toolbarMode = "minimal"

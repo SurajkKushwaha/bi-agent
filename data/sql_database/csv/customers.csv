@@ -1,0 +1,2001 @@
+customer_id,customer_city,customer_state
+C00001,porto alegre,RS
+C00002,belo horizonte,MG
+C00003,florianopolis,SC
+C00004,curitiba,PR
+C00005,sao paulo,SP
+C00006,belem,PA
+C00007,porto alegre,RS
+C00008,porto alegre,RS
+C00009,sao paulo,SP
+C00010,belo horizonte,MG
+C00011,rio de janeiro,RJ
+C00012,goiania,GO
+C00013,fortaleza,CE
+C00014,florianopolis,SC
+C00015,belo horizonte,MG
+C00016,sao paulo,SP
+C00017,salvador,BA
+C00018,sao paulo,SP
+C00019,florianopolis,SC
+C00020,fortaleza,CE
+C00021,porto alegre,RS
+C00022,rio de janeiro,RJ
+C00023,belem,PA
+C00024,brasilia,DF
+C00025,porto alegre,RS
+C00026,sao paulo,SP
+C00027,belo horizonte,MG
+C00028,sao paulo,SP
+C00029,sao paulo,SP
+C00030,curitiba,PR
+C00031,porto alegre,RS
+C00032,manaus,AM
+C00033,rio de janeiro,RJ
+C00034,rio de janeiro,RJ
+C00035,belo horizonte,MG
+C00036,sao paulo,SP
+C00037,sao paulo,SP
+C00038,belo horizonte,MG
+C00039,sao paulo,SP
+C00040,fortaleza,CE
+C00041,belo horizonte,MG
+C00042,florianopolis,SC
+C00043,curitiba,PR
+C00044,rio de janeiro,RJ
+C00045,florianopolis,SC
+C00046,porto alegre,RS
+C00047,rio de janeiro,RJ
+C00048,sao paulo,SP
+C00049,curitiba,PR
+C00050,sao paulo,SP
+C00051,sao paulo,SP
+C00052,sao paulo,SP
+C00053,porto alegre,RS
+C00054,fortaleza,CE
+C00055,curitiba,PR
+C00056,porto alegre,RS
+C00057,belo horizonte,MG
+C00058,salvador,BA
+C00059,sao paulo,SP
+C00060,sao paulo,SP
+C00061,fortaleza,CE
+C00062,belo horizonte,MG
+C00063,salvador,BA
+C00064,porto alegre,RS
+C00065,fortaleza,CE
+C00066,salvador,BA
+C00067,salvador,BA
+C00068,rio de janeiro,RJ
+C00069,sao paulo,SP
+C00070,belo horizonte,MG
+C00071,sao paulo,SP
+C00072,rio de janeiro,RJ
+C00073,florianopolis,SC
+C00074,sao paulo,SP
+C00075,sao paulo,SP
+C00076,sao paulo,SP
+C00077,sao paulo,SP
+C00078,fortaleza,CE
+C00079,salvador,BA
+C00080,porto alegre,RS
+C00081,fortaleza,CE
+C00082,rio de janeiro,RJ
+C00083,florianopolis,SC
+C00084,sao paulo,SP
+C00085,sao paulo,SP
+C00086,sao paulo,SP
+C00087,curitiba,PR
+C00088,belo horizonte,MG
+C00089,sao paulo,SP
+C00090,belo horizonte,MG
+C00091,sao paulo,SP
+C00092,curitiba,PR
+C00093,belo horizonte,MG
+C00094,rio de janeiro,RJ
+C00095,rio de janeiro,RJ
+C00096,fortaleza,CE
+C00097,rio de janeiro,RJ
+C00098,sao paulo,SP
+C00099,sao paulo,SP
+C00100,manaus,AM
+C00101,goiania,GO
+C00102,curitiba,PR
+C00103,sao paulo,SP
+C00104,manaus,AM
+C00105,porto alegre,RS
+C00106,curitiba,PR
+C00107,belo horizonte,MG
+C00108,sao paulo,SP
+C00109,sao paulo,SP
+C00110,goiania,GO
+C00111,belo horizonte,MG
+C00112,sao paulo,SP
+C00113,rio de janeiro,RJ
+C00114,salvador,BA
+C00115,sao paulo,SP
+C00116,florianopolis,SC
+C00117,porto alegre,RS
+C00118,curitiba,PR
+C00119,belo horizonte,MG
+C00120,recife,PE
+C00121,recife,PE
+C00122,fortaleza,CE
+C00123,sao paulo,SP
+C00124,belo horizonte,MG
+C00125,sao paulo,SP
+C00126,belo horizonte,MG
+C00127,rio de janeiro,RJ
+C00128,sao paulo,SP
+C00129,sao paulo,SP
+C00130,recife,PE
+C00131,sao paulo,SP
+C00132,goiania,GO
+C00133,recife,PE
+C00134,rio de janeiro,RJ
+C00135,recife,PE
+C00136,sao paulo,SP
+C00137,manaus,AM
+C00138,belo horizonte,MG
+C00139,porto alegre,RS
+C00140,sao paulo,SP
+C00141,belo horizonte,MG
+C00142,belo horizonte,MG
+C00143,goiania,GO
+C00144,salvador,BA
+C00145,belo horizonte,MG
+C00146,sao paulo,SP
+C00147,rio de janeiro,RJ
+C00148,salvador,BA
+C00149,belo horizonte,MG
+C00150,sao paulo,SP
+C00151,florianopolis,SC
+C00152,brasilia,DF
+C00153,sao paulo,SP
+C00154,salvador,BA
+C00155,sao paulo,SP
+C00156,curitiba,PR
+C00157,sao paulo,SP
+C00158,fortaleza,CE
+C00159,curitiba,PR
+C00160,porto alegre,RS
+C00161,sao paulo,SP
+C00162,goiania,GO
+C00163,sao paulo,SP
+C00164,sao paulo,SP
+C00165,salvador,BA
+C00166,rio de janeiro,RJ
+C00167,florianopolis,SC
+C00168,porto alegre,RS
+C00169,rio de janeiro,RJ
+C00170,manaus,AM
+C00171,sao paulo,SP
+C00172,salvador,BA
+C00173,sao paulo,SP
+C00174,goiania,GO
+C00175,sao paulo,SP
+C00176,sao paulo,SP
+C00177,belo horizonte,MG
+C00178,belem,PA
+C00179,brasilia,DF
+C00180,porto alegre,RS
+C00181,brasilia,DF
+C00182,brasilia,DF
+C00183,salvador,BA
+C00184,rio de janeiro,RJ
+C00185,porto alegre,RS
+C00186,fortaleza,CE
+C00187,rio de janeiro,RJ
+C00188,sao paulo,SP
+C00189,porto alegre,RS
+C00190,sao paulo,SP
+C00191,goiania,GO
+C00192,sao paulo,SP
+C00193,sao paulo,SP
+C00194,florianopolis,SC
+C00195,sao paulo,SP
+C00196,sao paulo,SP
+C00197,recife,PE
+C00198,brasilia,DF
+C00199,sao paulo,SP
+C00200,rio de janeiro,RJ
+C00201,porto alegre,RS
+C00202,belem,PA
+C00203,belo horizonte,MG
+C00204,sao paulo,SP
+C00205,sao paulo,SP
+C00206,sao paulo,SP
+C00207,sao paulo,SP
+C00208,curitiba,PR
+C00209,sao paulo,SP
+C00210,belo horizonte,MG
+C00211,curitiba,PR
+C00212,recife,PE
+C00213,sao paulo,SP
+C00214,porto alegre,RS
+C00215,curitiba,PR
+C00216,curitiba,PR
+C00217,sao paulo,SP
+C00218,sao paulo,SP
+C00219,goiania,GO
+C00220,rio de janeiro,RJ
+C00221,rio de janeiro,RJ
+C00222,belo horizonte,MG
+C00223,fortaleza,CE
+C00224,manaus,AM
+C00225,sao paulo,SP
+C00226,goiania,GO
+C00227,sao paulo,SP
+C00228,salvador,BA
+C00229,fortaleza,CE
+C00230,sao paulo,SP
+C00231,sao paulo,SP
+C00232,belo horizonte,MG
+C00233,manaus,AM
+C00234,recife,PE
+C00235,goiania,GO
+C00236,porto alegre,RS
+C00237,belo horizonte,MG
+C00238,porto alegre,RS
+C00239,sao paulo,SP
+C00240,sao paulo,SP
+C00241,florianopolis,SC
+C00242,porto alegre,RS
+C00243,sao paulo,SP
+C00244,salvador,BA
+C00245,recife,PE
+C00246,brasilia,DF
+C00247,recife,PE
+C00248,belo horizonte,MG
+C00249,rio de janeiro,RJ
+C00250,belo horizonte,MG
+C00251,fortaleza,CE
+C00252,brasilia,DF
+C00253,belo horizonte,MG
+C00254,sao paulo,SP
+C00255,sao paulo,SP
+C00256,porto alegre,RS
+C00257,florianopolis,SC
+C00258,sao paulo,SP
+C00259,sao paulo,SP
+C00260,recife,PE
+C00261,sao paulo,SP
+C00262,florianopolis,SC
+C00263,rio de janeiro,RJ
+C00264,sao paulo,SP
+C00265,goiania,GO
+C00266,sao paulo,SP
+C00267,sao paulo,SP
+C00268,sao paulo,SP
+C00269,sao paulo,SP
+C00270,sao paulo,SP
+C00271,sao paulo,SP
+C00272,sao paulo,SP
+C00273,sao paulo,SP
+C00274,recife,PE
+C00275,curitiba,PR
+C00276,rio de janeiro,RJ
+C00277,rio de janeiro,RJ
+C00278,belo horizonte,MG
+C00279,brasilia,DF
+C00280,florianopolis,SC
+C00281,sao paulo,SP
+C00282,sao paulo,SP
+C00283,sao paulo,SP
+C00284,sao paulo,SP
+C00285,salvador,BA
+C00286,belo horizonte,MG
+C00287,sao paulo,SP
+C00288,rio de janeiro,RJ
+C00289,salvador,BA
+C00290,sao paulo,SP
+C00291,florianopolis,SC
+C00292,sao paulo,SP
+C00293,goiania,GO
+C00294,sao paulo,SP
+C00295,florianopolis,SC
+C00296,goiania,GO
+C00297,belem,PA
+C00298,porto alegre,RS
+C00299,porto alegre,RS
+C00300,fortaleza,CE
+C00301,porto alegre,RS
+C00302,sao paulo,SP
+C00303,salvador,BA
+C00304,salvador,BA
+C00305,florianopolis,SC
+C00306,belo horizonte,MG
+C00307,rio de janeiro,RJ
+C00308,fortaleza,CE
+C00309,sao paulo,SP
+C00310,sao paulo,SP
+C00311,belo horizonte,MG
+C00312,belo horizonte,MG
+C00313,sao paulo,SP
+C00314,rio de janeiro,RJ
+C00315,rio de janeiro,RJ
+C00316,rio de janeiro,RJ
+C00317,rio de janeiro,RJ
+C00318,curitiba,PR
+C00319,sao paulo,SP
+C00320,manaus,AM
+C00321,goiania,GO
+C00322,belo horizonte,MG
+C00323,rio de janeiro,RJ
+C00324,salvador,BA
+C00325,florianopolis,SC
+C00326,fortaleza,CE
+C00327,porto alegre,RS
+C00328,salvador,BA
+C00329,fortaleza,CE
+C00330,sao paulo,SP
+C00331,curitiba,PR
+C00332,sao paulo,SP
+C00333,curitiba,PR
+C00334,brasilia,DF
+C00335,sao paulo,SP
+C00336,recife,PE
+C00337,sao paulo,SP
+C00338,curitiba,PR
+C00339,sao paulo,SP
+C00340,goiania,GO
+C00341,sao paulo,SP
+C00342,manaus,AM
+C00343,porto alegre,RS
+C00344,recife,PE
+C00345,porto alegre,RS
+C00346,porto alegre,RS
+C00347,manaus,AM
+C00348,sao paulo,SP
+C00349,recife,PE
+C00350,sao paulo,SP
+C00351,recife,PE
+C00352,sao paulo,SP
+C00353,salvador,BA
+C00354,salvador,BA
+C00355,belo horizonte,MG
+C00356,salvador,BA
+C00357,porto alegre,RS
+C00358,porto alegre,RS
+C00359,belo horizonte,MG
+C00360,recife,PE
+C00361,goiania,GO
+C00362,sao paulo,SP
+C00363,sao paulo,SP
+C00364,sao paulo,SP
+C00365,fortaleza,CE
+C00366,belo horizonte,MG
+C00367,porto alegre,RS
+C00368,curitiba,PR
+C00369,rio de janeiro,RJ
+C00370,brasilia,DF
+C00371,porto alegre,RS
+C00372,sao paulo,SP
+C00373,rio de janeiro,RJ
+C00374,rio de janeiro,RJ
+C00375,sao paulo,SP
+C00376,sao paulo,SP
+C00377,goiania,GO
+C00378,belo horizonte,MG
+C00379,rio de janeiro,RJ
+C00380,curitiba,PR
+C00381,salvador,BA
+C00382,goiania,GO
+C00383,porto alegre,RS
+C00384,belo horizonte,MG
+C00385,rio de janeiro,RJ
+C00386,belem,PA
+C00387,curitiba,PR
+C00388,manaus,AM
+C00389,sao paulo,SP
+C00390,florianopolis,SC
+C00391,fortaleza,CE
+C00392,sao paulo,SP
+C00393,recife,PE
+C00394,curitiba,PR
+C00395,sao paulo,SP
+C00396,belo horizonte,MG
+C00397,florianopolis,SC
+C00398,sao paulo,SP
+C00399,belo horizonte,MG
+C00400,belo horizonte,MG
+C00401,rio de janeiro,RJ
+C00402,goiania,GO
+C00403,porto alegre,RS
+C00404,sao paulo,SP
+C00405,belem,PA
+C00406,brasilia,DF
+C00407,sao paulo,SP
+C00408,florianopolis,SC
+C00409,sao paulo,SP
+C00410,belem,PA
+C00411,fortaleza,CE
+C00412,fortaleza,CE
+C00413,sao paulo,SP
+C00414,brasilia,DF
+C00415,sao paulo,SP
+C00416,sao paulo,SP
+C00417,sao paulo,SP
+C00418,porto alegre,RS
+C00419,sao paulo,SP
+C00420,goiania,GO
+C00421,fortaleza,CE
+C00422,sao paulo,SP
+C00423,sao paulo,SP
+C00424,sao paulo,SP
+C00425,recife,PE
+C00426,porto alegre,RS
+C00427,sao paulo,SP
+C00428,florianopolis,SC
+C00429,sao paulo,SP
+C00430,porto alegre,RS
+C00431,goiania,GO
+C00432,porto alegre,RS
+C00433,curitiba,PR
+C00434,florianopolis,SC
+C00435,sao paulo,SP
+C00436,sao paulo,SP
+C00437,sao paulo,SP
+C00438,belo horizonte,MG
+C00439,porto alegre,RS
+C00440,fortaleza,CE
+C00441,florianopolis,SC
+C00442,sao paulo,SP
+C00443,curitiba,PR
+C00444,sao paulo,SP
+C00445,sao paulo,SP
+C00446,curitiba,PR
+C00447,belem,PA
+C00448,recife,PE
+C00449,sao paulo,SP
+C00450,recife,PE
+C00451,sao paulo,SP
+C00452,brasilia,DF
+C00453,curitiba,PR
+C00454,sao paulo,SP
+C00455,sao paulo,SP
+C00456,sao paulo,SP
+C00457,belem,PA
+C00458,belo horizonte,MG
+C00459,porto alegre,RS
+C00460,fortaleza,CE
+C00461,salvador,BA
+C00462,sao paulo,SP
+C00463,manaus,AM
+C00464,rio de janeiro,RJ
+C00465,salvador,BA
+C00466,curitiba,PR
+C00467,fortaleza,CE
+C00468,manaus,AM
+C00469,sao paulo,SP
+C00470,belo horizonte,MG
+C00471,rio de janeiro,RJ
+C00472,belo horizonte,MG
+C00473,sao paulo,SP
+C00474,sao paulo,SP
+C00475,sao paulo,SP
+C00476,rio de janeiro,RJ
+C00477,belo horizonte,MG
+C00478,recife,PE
+C00479,fortaleza,CE
+C00480,belo horizonte,MG
+C00481,rio de janeiro,RJ
+C00482,sao paulo,SP
+C00483,recife,PE
+C00484,rio de janeiro,RJ
+C00485,sao paulo,SP
+C00486,belo horizonte,MG
+C00487,belo horizonte,MG
+C00488,sao paulo,SP
+C00489,salvador,BA
+C00490,salvador,BA
+C00491,curitiba,PR
+C00492,fortaleza,CE
+C00493,fortaleza,CE
+C00494,rio de janeiro,RJ
+C00495,porto alegre,RS
+C00496,salvador,BA
+C00497,belo horizonte,MG
+C00498,recife,PE
+C00499,rio de janeiro,RJ
+C00500,salvador,BA
+C00501,curitiba,PR
+C00502,brasilia,DF
+C00503,goiania,GO
+C00504,belo horizonte,MG
+C00505,salvador,BA
+C00506,porto alegre,RS
+C00507,rio de janeiro,RJ
+C00508,florianopolis,SC
+C00509,belo horizonte,MG
+C00510,sao paulo,SP
+C00511,sao paulo,SP
+C00512,florianopolis,SC
+C00513,sao paulo,SP
+C00514,sao paulo,SP
+C00515,rio de janeiro,RJ
+C00516,sao paulo,SP
+C00517,rio de janeiro,RJ
+C00518,porto alegre,RS
+C00519,sao paulo,SP
+C00520,florianopolis,SC
+C00521,florianopolis,SC
+C00522,rio de janeiro,RJ
+C00523,sao paulo,SP
+C00524,recife,PE
+C00525,sao paulo,SP
+C00526,rio de janeiro,RJ
+C00527,manaus,AM
+C00528,belem,PA
+C00529,porto alegre,RS
+C00530,rio de janeiro,RJ
+C00531,curitiba,PR
+C00532,curitiba,PR
+C00533,rio de janeiro,RJ
+C00534,fortaleza,CE
+C00535,sao paulo,SP
+C00536,sao paulo,SP
+C00537,salvador,BA
+C00538,sao paulo,SP
+C00539,sao paulo,SP
+C00540,florianopolis,SC
+C00541,belem,PA
+C00542,salvador,BA
+C00543,florianopolis,SC
+C00544,belem,PA
+C00545,sao paulo,SP
+C00546,belo horizonte,MG
+C00547,rio de janeiro,RJ
+C00548,sao paulo,SP
+C00549,porto alegre,RS
+C00550,belo horizonte,MG
+C00551,belo horizonte,MG
+C00552,sao paulo,SP
+C00553,sao paulo,SP
+C00554,goiania,GO
+C00555,sao paulo,SP
+C00556,sao paulo,SP
+C00557,sao paulo,SP
+C00558,belo horizonte,MG
+C00559,recife,PE
+C00560,belo horizonte,MG
+C00561,sao paulo,SP
+C00562,sao paulo,SP
+C00563,florianopolis,SC
+C00564,fortaleza,CE
+C00565,fortaleza,CE
+C00566,curitiba,PR
+C00567,porto alegre,RS
+C00568,sao paulo,SP
+C00569,rio de janeiro,RJ
+C00570,salvador,BA
+C00571,rio de janeiro,RJ
+C00572,florianopolis,SC
+C00573,belo horizonte,MG
+C00574,porto alegre,RS
+C00575,florianopolis,SC
+C00576,belo horizonte,MG
+C00577,goiania,GO
+C00578,recife,PE
+C00579,florianopolis,SC
+C00580,rio de janeiro,RJ
+C00581,belo horizonte,MG
+C00582,salvador,BA
+C00583,sao paulo,SP
+C00584,rio de janeiro,RJ
+C00585,goiania,GO
+C00586,fortaleza,CE
+C00587,sao paulo,SP
+C00588,rio de janeiro,RJ
+C00589,sao paulo,SP
+C00590,sao paulo,SP
+C00591,goiania,GO
+C00592,belo horizonte,MG
+C00593,rio de janeiro,RJ
+C00594,recife,PE
+C00595,sao paulo,SP
+C00596,sao paulo,SP
+C00597,curitiba,PR
+C00598,fortaleza,CE
+C00599,belem,PA
+C00600,recife,PE
+C00601,belo horizonte,MG
+C00602,porto alegre,RS
+C00603,goiania,GO
+C00604,curitiba,PR
+C00605,manaus,AM
+C00606,porto alegre,RS
+C00607,brasilia,DF
+C00608,sao paulo,SP
+C00609,curitiba,PR
+C00610,belo horizonte,MG
+C00611,salvador,BA
+C00612,fortaleza,CE
+C00613,manaus,AM
+C00614,belem,PA
+C00615,sao paulo,SP
+C00616,curitiba,PR
+C00617,porto alegre,RS
+C00618,rio de janeiro,RJ
+C00619,sao paulo,SP
+C00620,sao paulo,SP
+C00621,porto alegre,RS
+C00622,belo horizonte,MG
+C00623,belem,PA
+C00624,belo horizonte,MG
+C00625,belem,PA
+C00626,belo horizonte,MG
+C00627,porto alegre,RS
+C00628,sao paulo,SP
+C00629,salvador,BA
+C00630,porto alegre,RS
+C00631,goiania,GO
+C00632,florianopolis,SC
+C00633,sao paulo,SP
+C00634,rio de janeiro,RJ
+C00635,sao paulo,SP
+C00636,sao paulo,SP
+C00637,curitiba,PR
+C00638,curitiba,PR
+C00639,porto alegre,RS
+C00640,brasilia,DF
+C00641,curitiba,PR
+C00642,porto alegre,RS
+C00643,sao paulo,SP
+C00644,sao paulo,SP
+C00645,recife,PE
+C00646,florianopolis,SC
+C00647,sao paulo,SP
+C00648,salvador,BA
+C00649,curitiba,PR
+C00650,sao paulo,SP
+C00651,rio de janeiro,RJ
+C00652,brasilia,DF
+C00653,curitiba,PR
+C00654,sao paulo,SP
+C00655,florianopolis,SC
+C00656,rio de janeiro,RJ
+C00657,florianopolis,SC
+C00658,sao paulo,SP
+C00659,recife,PE
+C00660,rio de janeiro,RJ
+C00661,sao paulo,SP
+C00662,brasilia,DF
+C00663,sao paulo,SP
+C00664,sao paulo,SP
+C00665,rio de janeiro,RJ
+C00666,curitiba,PR
+C00667,porto alegre,RS
+C00668,belem,PA
+C00669,sao paulo,SP
+C00670,rio de janeiro,RJ
+C00671,sao paulo,SP
+C00672,salvador,BA
+C00673,belem,PA
+C00674,curitiba,PR
+C00675,recife,PE
+C00676,rio de janeiro,RJ
+C00677,goiania,GO
+C00678,belo horizonte,MG
+C00679,sao paulo,SP
+C00680,rio de janeiro,RJ
+C00681,sao paulo,SP
+C00682,sao paulo,SP
+C00683,sao paulo,SP
+C00684,belo horizonte,MG
+C00685,fortaleza,CE
+C00686,rio de janeiro,RJ
+C00687,belo horizonte,MG
+C00688,manaus,AM
+C00689,porto alegre,RS
+C00690,salvador,BA
+C00691,sao paulo,SP
+C00692,brasilia,DF
+C00693,sao paulo,SP
+C00694,rio de janeiro,RJ
+C00695,goiania,GO
+C00696,salvador,BA
+C00697,porto alegre,RS
+C00698,recife,PE
+C00699,fortaleza,CE
+C00700,sao paulo,SP
+C00701,sao paulo,SP
+C00702,rio de janeiro,RJ
+C00703,sao paulo,SP
+C00704,brasilia,DF
+C00705,sao paulo,SP
+C00706,salvador,BA
+C00707,porto alegre,RS
+C00708,porto alegre,RS
+C00709,belo horizonte,MG
+C00710,belo horizonte,MG
+C00711,belem,PA
+C00712,curitiba,PR
+C00713,florianopolis,SC
+C00714,goiania,GO
+C00715,porto alegre,RS
+C00716,sao paulo,SP
+C00717,salvador,BA
+C00718,sao paulo,SP
+C00719,fortaleza,CE
+C00720,manaus,AM
+C00721,salvador,BA
+C00722,belo horizonte,MG
+C00723,sao paulo,SP
+C00724,manaus,AM
+C00725,sao paulo,SP
+C00726,sao paulo,SP
+C00727,sao paulo,SP
+C00728,sao paulo,SP
+C00729,belo horizonte,MG
+C00730,salvador,BA
+C00731,rio de janeiro,RJ
+C00732,sao paulo,SP
+C00733,sao paulo,SP
+C00734,rio de janeiro,RJ
+C00735,sao paulo,SP
+C00736,curitiba,PR
+C00737,sao paulo,SP
+C00738,rio de janeiro,RJ
+C00739,rio de janeiro,RJ
+C00740,belo horizonte,MG
+C00741,sao paulo,SP
+C00742,sao paulo,SP
+C00743,brasilia,DF
+C00744,sao paulo,SP
+C00745,belo horizonte,MG
+C00746,belo horizonte,MG
+C00747,rio de janeiro,RJ
+C00748,belo horizonte,MG
+C00749,porto alegre,RS
+C00750,florianopolis,SC
+C00751,sao paulo,SP
+C00752,rio de janeiro,RJ
+C00753,sao paulo,SP
+C00754,belo horizonte,MG
+C00755,curitiba,PR
+C00756,sao paulo,SP
+C00757,rio de janeiro,RJ
+C00758,goiania,GO
+C00759,sao paulo,SP
+C00760,belo horizonte,MG
+C00761,curitiba,PR
+C00762,sao paulo,SP
+C00763,sao paulo,SP
+C00764,sao paulo,SP
+C00765,goiania,GO
+C00766,sao paulo,SP
+C00767,sao paulo,SP
+C00768,sao paulo,SP
+C00769,sao paulo,SP
+C00770,recife,PE
+C00771,sao paulo,SP
+C00772,salvador,BA
+C00773,recife,PE
+C00774,florianopolis,SC
+C00775,sao paulo,SP
+C00776,florianopolis,SC
+C00777,recife,PE
+C00778,sao paulo,SP
+C00779,porto alegre,RS
+C00780,florianopolis,SC
+C00781,sao paulo,SP
+C00782,goiania,GO
+C00783,belo horizonte,MG
+C00784,recife,PE
+C00785,belem,PA
+C00786,rio de janeiro,RJ
+C00787,florianopolis,SC
+C00788,rio de janeiro,RJ
+C00789,porto alegre,RS
+C00790,recife,PE
+C00791,sao paulo,SP
+C00792,belo horizonte,MG
+C00793,rio de janeiro,RJ
+C00794,sao paulo,SP
+C00795,sao paulo,SP
+C00796,rio de janeiro,RJ
+C00797,sao paulo,SP
+C00798,sao paulo,SP
+C00799,curitiba,PR
+C00800,curitiba,PR
+C00801,curitiba,PR
+C00802,rio de janeiro,RJ
+C00803,brasilia,DF
+C00804,recife,PE
+C00805,sao paulo,SP
+C00806,sao paulo,SP
+C00807,curitiba,PR
+C00808,sao paulo,SP
+C00809,belo horizonte,MG
+C00810,belem,PA
+C00811,sao paulo,SP
+C00812,sao paulo,SP
+C00813,belem,PA
+C00814,recife,PE
+C00815,sao paulo,SP
+C00816,brasilia,DF
+C00817,brasilia,DF
+C00818,salvador,BA
+C00819,recife,PE
+C00820,sao paulo,SP
+C00821,sao paulo,SP
+C00822,recife,PE
+C00823,sao paulo,SP
+C00824,fortaleza,CE
+C00825,florianopolis,SC
+C00826,sao paulo,SP
+C00827,recife,PE
+C00828,sao paulo,SP
+C00829,brasilia,DF
+C00830,sao paulo,SP
+C00831,recife,PE
+C00832,salvador,BA
+C00833,rio de janeiro,RJ
+C00834,curitiba,PR
+C00835,curitiba,PR
+C00836,salvador,BA
+C00837,porto alegre,RS
+C00838,belem,PA
+C00839,belo horizonte,MG
+C00840,salvador,BA
+C00841,sao paulo,SP
+C00842,porto alegre,RS
+C00843,salvador,BA
+C00844,rio de janeiro,RJ
+C00845,sao paulo,SP
+C00846,brasilia,DF
+C00847,rio de janeiro,RJ
+C00848,curitiba,PR
+C00849,sao paulo,SP
+C00850,manaus,AM
+C00851,sao paulo,SP
+C00852,sao paulo,SP
+C00853,florianopolis,SC
+C00854,goiania,GO
+C00855,sao paulo,SP
+C00856,belo horizonte,MG
+C00857,curitiba,PR
+C00858,brasilia,DF
+C00859,rio de janeiro,RJ
+C00860,salvador,BA
+C00861,porto alegre,RS
+C00862,curitiba,PR
+C00863,porto alegre,RS
+C00864,salvador,BA
+C00865,sao paulo,SP
+C00866,goiania,GO
+C00867,brasilia,DF
+C00868,porto alegre,RS
+C00869,sao paulo,SP
+C00870,sao paulo,SP
+C00871,porto alegre,RS
+C00872,sao paulo,SP
+C00873,belem,PA
+C00874,rio de janeiro,RJ
+C00875,curitiba,PR
+C00876,brasilia,DF
+C00877,rio de janeiro,RJ
+C00878,rio de janeiro,RJ
+C00879,recife,PE
+C00880,recife,PE
+C00881,rio de janeiro,RJ
+C00882,recife,PE
+C00883,goiania,GO
+C00884,belo horizonte,MG
+C00885,sao paulo,SP
+C00886,rio de janeiro,RJ
+C00887,rio de janeiro,RJ
+C00888,sao paulo,SP
+C00889,sao paulo,SP
+C00890,curitiba,PR
+C00891,rio de janeiro,RJ
+C00892,manaus,AM
+C00893,sao paulo,SP
+C00894,sao paulo,SP
+C00895,porto alegre,RS
+C00896,brasilia,DF
+C00897,sao paulo,SP
+C00898,sao paulo,SP
+C00899,sao paulo,SP
+C00900,salvador,BA
+C00901,belo horizonte,MG
+C00902,sao paulo,SP
+C00903,sao paulo,SP
+C00904,belo horizonte,MG
+C00905,manaus,AM
+C00906,fortaleza,CE
+C00907,belo horizonte,MG
+C00908,sao paulo,SP
+C00909,sao paulo,SP
+C00910,sao paulo,SP
+C00911,porto alegre,RS
+C00912,brasilia,DF
+C00913,goiania,GO
+C00914,belem,PA
+C00915,belem,PA
+C00916,manaus,AM
+C00917,sao paulo,SP
+C00918,sao paulo,SP
+C00919,rio de janeiro,RJ
+C00920,salvador,BA
+C00921,sao paulo,SP
+C00922,florianopolis,SC
+C00923,recife,PE
+C00924,salvador,BA
+C00925,sao paulo,SP
+C00926,sao paulo,SP
+C00927,sao paulo,SP
+C00928,florianopolis,SC
+C00929,recife,PE
+C00930,curitiba,PR
+C00931,sao paulo,SP
+C00932,rio de janeiro,RJ
+C00933,rio de janeiro,RJ
+C00934,porto alegre,RS
+C00935,porto alegre,RS
+C00936,sao paulo,SP
+C00937,manaus,AM
+C00938,sao paulo,SP
+C00939,brasilia,DF
+C00940,sao paulo,SP
+C00941,sao paulo,SP
+C00942,florianopolis,SC
+C00943,sao paulo,SP
+C00944,belo horizonte,MG
+C00945,belo horizonte,MG
+C00946,sao paulo,SP
+C00947,curitiba,PR
+C00948,florianopolis,SC
+C00949,brasilia,DF
+C00950,rio de janeiro,RJ
+C00951,salvador,BA
+C00952,sao paulo,SP
+C00953,sao paulo,SP
+C00954,sao paulo,SP
+C00955,manaus,AM
+C00956,brasilia,DF
+C00957,porto alegre,RS
+C00958,salvador,BA
+C00959,belo horizonte,MG
+C00960,salvador,BA
+C00961,salvador,BA
+C00962,belo horizonte,MG
+C00963,sao paulo,SP
+C00964,sao paulo,SP
+C00965,manaus,AM
+C00966,belo horizonte,MG
+C00967,manaus,AM
+C00968,sao paulo,SP
+C00969,salvador,BA
+C00970,sao paulo,SP
+C00971,sao paulo,SP
+C00972,sao paulo,SP
+C00973,sao paulo,SP
+C00974,goiania,GO
+C00975,rio de janeiro,RJ
+C00976,recife,PE
+C00977,belo horizonte,MG
+C00978,rio de janeiro,RJ
+C00979,salvador,BA
+C00980,sao paulo,SP
+C00981,belem,PA
+C00982,florianopolis,SC
+C00983,porto alegre,RS
+C00984,belo horizonte,MG
+C00985,sao paulo,SP
+C00986,goiania,GO
+C00987,rio de janeiro,RJ
+C00988,sao paulo,SP
+C00989,rio de janeiro,RJ
+C00990,porto alegre,RS
+C00991,recife,PE
+C00992,porto alegre,RS
+C00993,porto alegre,RS
+C00994,sao paulo,SP
+C00995,goiania,GO
+C00996,belo horizonte,MG
+C00997,fortaleza,CE
+C00998,sao paulo,SP
+C00999,belem,PA
+C01000,sao paulo,SP
+C01001,sao paulo,SP
+C01002,belo horizonte,MG
+C01003,sao paulo,SP
+C01004,sao paulo,SP
+C01005,fortaleza,CE
+C01006,rio de janeiro,RJ
+C01007,goiania,GO
+C01008,rio de janeiro,RJ
+C01009,curitiba,PR
+C01010,belo horizonte,MG
+C01011,fortaleza,CE
+C01012,recife,PE
+C01013,belo horizonte,MG
+C01014,manaus,AM
+C01015,rio de janeiro,RJ
+C01016,sao paulo,SP
+C01017,curitiba,PR
+C01018,florianopolis,SC
+C01019,sao paulo,SP
+C01020,belo horizonte,MG
+C01021,brasilia,DF
+C01022,porto alegre,RS
+C01023,belem,PA
+C01024,salvador,BA
+C01025,fortaleza,CE
+C01026,rio de janeiro,RJ
+C01027,manaus,AM
+C01028,rio de janeiro,RJ
+C01029,curitiba,PR
+C01030,rio de janeiro,RJ
+C01031,salvador,BA
+C01032,curitiba,PR
+C01033,belo horizonte,MG
+C01034,goiania,GO
+C01035,belo horizonte,MG
+C01036,fortaleza,CE
+C01037,rio de janeiro,RJ
+C01038,rio de janeiro,RJ
+C01039,belo horizonte,MG
+C01040,sao paulo,SP
+C01041,sao paulo,SP
+C01042,fortaleza,CE
+C01043,fortaleza,CE
+C01044,fortaleza,CE
+C01045,sao paulo,SP
+C01046,rio de janeiro,RJ
+C01047,sao paulo,SP
+C01048,porto alegre,RS
+C01049,brasilia,DF
+C01050,sao paulo,SP
+C01051,fortaleza,CE
+C01052,sao paulo,SP
+C01053,sao paulo,SP
+C01054,sao paulo,SP
+C01055,sao paulo,SP
+C01056,curitiba,PR
+C01057,goiania,GO
+C01058,sao paulo,SP
+C01059,salvador,BA
+C01060,curitiba,PR
+C01061,manaus,AM
+C01062,recife,PE
+C01063,sao paulo,SP
+C01064,recife,PE
+C01065,rio de janeiro,RJ
+C01066,belem,PA
+C01067,rio de janeiro,RJ
+C01068,curitiba,PR
+C01069,sao paulo,SP
+C01070,rio de janeiro,RJ
+C01071,brasilia,DF
+C01072,recife,PE
+C01073,belo horizonte,MG
+C01074,goiania,GO
+C01075,florianopolis,SC
+C01076,rio de janeiro,RJ
+C01077,salvador,BA
+C01078,belo horizonte,MG
+C01079,fortaleza,CE
+C01080,rio de janeiro,RJ
+C01081,sao paulo,SP
+C01082,goiania,GO
+C01083,goiania,GO
+C01084,florianopolis,SC
+C01085,belem,PA
+C01086,porto alegre,RS
+C01087,porto alegre,RS
+C01088,porto alegre,RS
+C01089,belo horizonte,MG
+C01090,belo horizonte,MG
+C01091,sao paulo,SP
+C01092,fortaleza,CE
+C01093,sao paulo,SP
+C01094,sao paulo,SP
+C01095,recife,PE
+C01096,rio de janeiro,RJ
+C01097,sao paulo,SP
+C01098,florianopolis,SC
+C01099,brasilia,DF
+C01100,sao paulo,SP
+C01101,sao paulo,SP
+C01102,rio de janeiro,RJ
+C01103,porto alegre,RS
+C01104,florianopolis,SC
+C01105,sao paulo,SP
+C01106,porto alegre,RS
+C01107,sao paulo,SP
+C01108,rio de janeiro,RJ
+C01109,belem,PA
+C01110,sao paulo,SP
+C01111,sao paulo,SP
+C01112,belo horizonte,MG
+C01113,recife,PE
+C01114,goiania,GO
+C01115,belem,PA
+C01116,sao paulo,SP
+C01117,sao paulo,SP
+C01118,porto alegre,RS
+C01119,sao paulo,SP
+C01120,brasilia,DF
+C01121,fortaleza,CE
+C01122,sao paulo,SP
+C01123,florianopolis,SC
+C01124,sao paulo,SP
+C01125,belo horizonte,MG
+C01126,salvador,BA
+C01127,belo horizonte,MG
+C01128,curitiba,PR
+C01129,fortaleza,CE
+C01130,belem,PA
+C01131,belem,PA
+C01132,salvador,BA
+C01133,sao paulo,SP
+C01134,curitiba,PR
+C01135,belem,PA
+C01136,rio de janeiro,RJ
+C01137,belo horizonte,MG
+C01138,belo horizonte,MG
+C01139,sao paulo,SP
+C01140,curitiba,PR
+C01141,rio de janeiro,RJ
+C01142,porto alegre,RS
+C01143,florianopolis,SC
+C01144,florianopolis,SC
+C01145,belo horizonte,MG
+C01146,rio de janeiro,RJ
+C01147,porto alegre,RS
+C01148,porto alegre,RS
+C01149,belo horizonte,MG
+C01150,brasilia,DF
+C01151,sao paulo,SP
+C01152,brasilia,DF
+C01153,sao paulo,SP
+C01154,sao paulo,SP
+C01155,salvador,BA
+C01156,sao paulo,SP
+C01157,sao paulo,SP
+C01158,sao paulo,SP
+C01159,belo horizonte,MG
+C01160,porto alegre,RS
+C01161,sao paulo,SP
+C01162,fortaleza,CE
+C01163,florianopolis,SC
+C01164,sao paulo,SP
+C01165,sao paulo,SP
+C01166,brasilia,DF
+C01167,florianopolis,SC
+C01168,salvador,BA
+C01169,florianopolis,SC
+C01170,sao paulo,SP
+C01171,rio de janeiro,RJ
+C01172,curitiba,PR
+C01173,sao paulo,SP
+C01174,porto alegre,RS
+C01175,belo horizonte,MG
+C01176,porto alegre,RS
+C01177,belo horizonte,MG
+C01178,rio de janeiro,RJ
+C01179,sao paulo,SP
+C01180,sao paulo,SP
+C01181,porto alegre,RS
+C01182,sao paulo,SP
+C01183,sao paulo,SP
+C01184,sao paulo,SP
+C01185,sao paulo,SP
+C01186,florianopolis,SC
+C01187,rio de janeiro,RJ
+C01188,belem,PA
+C01189,sao paulo,SP
+C01190,fortaleza,CE
+C01191,belo horizonte,MG
+C01192,rio de janeiro,RJ
+C01193,brasilia,DF
+C01194,belem,PA
+C01195,brasilia,DF
+C01196,sao paulo,SP
+C01197,sao paulo,SP
+C01198,fortaleza,CE
+C01199,sao paulo,SP
+C01200,curitiba,PR
+C01201,salvador,BA
+C01202,salvador,BA
+C01203,florianopolis,SC
+C01204,curitiba,PR
+C01205,sao paulo,SP
+C01206,sao paulo,SP
+C01207,recife,PE
+C01208,belo horizonte,MG
+C01209,sao paulo,SP
+C01210,belo horizonte,MG
+C01211,porto alegre,RS
+C01212,florianopolis,SC
+C01213,salvador,BA
+C01214,rio de janeiro,RJ
+C01215,sao paulo,SP
+C01216,salvador,BA
+C01217,rio de janeiro,RJ
+C01218,salvador,BA
+C01219,curitiba,PR
+C01220,sao paulo,SP
+C01221,sao paulo,SP
+C01222,sao paulo,SP
+C01223,brasilia,DF
+C01224,fortaleza,CE
+C01225,sao paulo,SP
+C01226,brasilia,DF
+C01227,belo horizonte,MG
+C01228,belo horizonte,MG
+C01229,goiania,GO
+C01230,sao paulo,SP
+C01231,sao paulo,SP
+C01232,recife,PE
+C01233,sao paulo,SP
+C01234,curitiba,PR
+C01235,sao paulo,SP
+C01236,sao paulo,SP
+C01237,sao paulo,SP
+C01238,belo horizonte,MG
+C01239,sao paulo,SP
+C01240,sao paulo,SP
+C01241,brasilia,DF
+C01242,rio de janeiro,RJ
+C01243,rio de janeiro,RJ
+C01244,sao paulo,SP
+C01245,rio de janeiro,RJ
+C01246,sao paulo,SP
+C01247,recife,PE
+C01248,sao paulo,SP
+C01249,brasilia,DF
+C01250,goiania,GO
+C01251,sao paulo,SP
+C01252,sao paulo,SP
+C01253,sao paulo,SP
+C01254,recife,PE
+C01255,sao paulo,SP
+C01256,florianopolis,SC
+C01257,porto alegre,RS
+C01258,florianopolis,SC
+C01259,salvador,BA
+C01260,belem,PA
+C01261,sao paulo,SP
+C01262,rio de janeiro,RJ
+C01263,rio de janeiro,RJ
+C01264,manaus,AM
+C01265,salvador,BA
+C01266,porto alegre,RS
+C01267,sao paulo,SP
+C01268,belem,PA
+C01269,belo horizonte,MG
+C01270,belo horizonte,MG
+C01271,belem,PA
+C01272,rio de janeiro,RJ
+C01273,rio de janeiro,RJ
+C01274,recife,PE
+C01275,sao paulo,SP
+C01276,rio de janeiro,RJ
+C01277,sao paulo,SP
+C01278,sao paulo,SP
+C01279,brasilia,DF
+C01280,recife,PE
+C01281,rio de janeiro,RJ
+C01282,rio de janeiro,RJ
+C01283,belo horizonte,MG
+C01284,fortaleza,CE
+C01285,goiania,GO
+C01286,goiania,GO
+C01287,rio de janeiro,RJ
+C01288,rio de janeiro,RJ
+C01289,belo horizonte,MG
+C01290,salvador,BA
+C01291,belo horizonte,MG
+C01292,fortaleza,CE
+C01293,salvador,BA
+C01294,rio de janeiro,RJ
+C01295,rio de janeiro,RJ
+C01296,rio de janeiro,RJ
+C01297,sao paulo,SP
+C01298,sao paulo,SP
+C01299,curitiba,PR
+C01300,rio de janeiro,RJ
+C01301,sao paulo,SP
+C01302,salvador,BA
+C01303,porto alegre,RS
+C01304,sao paulo,SP
+C01305,florianopolis,SC
+C01306,goiania,GO
+C01307,recife,PE
+C01308,fortaleza,CE
+C01309,sao paulo,SP
+C01310,manaus,AM
+C01311,rio de janeiro,RJ
+C01312,goiania,GO
+C01313,salvador,BA
+C01314,sao paulo,SP
+C01315,sao paulo,SP
+C01316,curitiba,PR
+C01317,salvador,BA
+C01318,sao paulo,SP
+C01319,porto alegre,RS
+C01320,florianopolis,SC
+C01321,belo horizonte,MG
+C01322,belo horizonte,MG
+C01323,sao paulo,SP
+C01324,porto alegre,RS
+C01325,rio de janeiro,RJ
+C01326,brasilia,DF
+C01327,rio de janeiro,RJ
+C01328,salvador,BA
+C01329,sao paulo,SP
+C01330,sao paulo,SP
+C01331,porto alegre,RS
+C01332,belo horizonte,MG
+C01333,salvador,BA
+C01334,manaus,AM
+C01335,manaus,AM
+C01336,florianopolis,SC
+C01337,sao paulo,SP
+C01338,recife,PE
+C01339,brasilia,DF
+C01340,rio de janeiro,RJ
+C01341,sao paulo,SP
+C01342,florianopolis,SC
+C01343,belo horizonte,MG
+C01344,salvador,BA
+C01345,belem,PA
+C01346,recife,PE
+C01347,belo horizonte,MG
+C01348,rio de janeiro,RJ
+C01349,belo horizonte,MG
+C01350,sao paulo,SP
+C01351,porto alegre,RS
+C01352,florianopolis,SC
+C01353,sao paulo,SP
+C01354,rio de janeiro,RJ
+C01355,brasilia,DF
+C01356,sao paulo,SP
+C01357,salvador,BA
+C01358,belo horizonte,MG
+C01359,curitiba,PR
+C01360,sao paulo,SP
+C01361,fortaleza,CE
+C01362,rio de janeiro,RJ
+C01363,recife,PE
+C01364,sao paulo,SP
+C01365,belo horizonte,MG
+C01366,salvador,BA
+C01367,sao paulo,SP
+C01368,sao paulo,SP
+C01369,sao paulo,SP
+C01370,rio de janeiro,RJ
+C01371,sao paulo,SP
+C01372,manaus,AM
+C01373,rio de janeiro,RJ
+C01374,porto alegre,RS
+C01375,belem,PA
+C01376,sao paulo,SP
+C01377,fortaleza,CE
+C01378,brasilia,DF
+C01379,fortaleza,CE
+C01380,belo horizonte,MG
+C01381,belo horizonte,MG
+C01382,sao paulo,SP
+C01383,salvador,BA
+C01384,belem,PA
+C01385,manaus,AM
+C01386,sao paulo,SP
+C01387,curitiba,PR
+C01388,rio de janeiro,RJ
+C01389,goiania,GO
+C01390,sao paulo,SP
+C01391,goiania,GO
+C01392,florianopolis,SC
+C01393,sao paulo,SP
+C01394,sao paulo,SP
+C01395,florianopolis,SC
+C01396,sao paulo,SP
+C01397,salvador,BA
+C01398,goiania,GO
+C01399,salvador,BA
+C01400,rio de janeiro,RJ
+C01401,belo horizonte,MG
+C01402,sao paulo,SP
+C01403,manaus,AM
+C01404,rio de janeiro,RJ
+C01405,sao paulo,SP
+C01406,sao paulo,SP
+C01407,manaus,AM
+C01408,sao paulo,SP
+C01409,brasilia,DF
+C01410,curitiba,PR
+C01411,florianopolis,SC
+C01412,belem,PA
+C01413,florianopolis,SC
+C01414,manaus,AM
+C01415,sao paulo,SP
+C01416,porto alegre,RS
+C01417,salvador,BA
+C01418,salvador,BA
+C01419,brasilia,DF
+C01420,belem,PA
+C01421,curitiba,PR
+C01422,belo horizonte,MG
+C01423,belo horizonte,MG
+C01424,rio de janeiro,RJ
+C01425,rio de janeiro,RJ
+C01426,rio de janeiro,RJ
+C01427,sao paulo,SP
+C01428,sao paulo,SP
+C01429,porto alegre,RS
+C01430,belo horizonte,MG
+C01431,goiania,GO
+C01432,recife,PE
+C01433,sao paulo,SP
+C01434,sao paulo,SP
+C01435,sao paulo,SP
+C01436,belem,PA
+C01437,sao paulo,SP
+C01438,salvador,BA
+C01439,goiania,GO
+C01440,belem,PA
+C01441,sao paulo,SP
+C01442,sao paulo,SP
+C01443,sao paulo,SP
+C01444,sao paulo,SP
+C01445,sao paulo,SP
+C01446,salvador,BA
+C01447,goiania,GO
+C01448,salvador,BA
+C01449,recife,PE
+C01450,sao paulo,SP
+C01451,porto alegre,RS
+C01452,recife,PE
+C01453,brasilia,DF
+C01454,manaus,AM
+C01455,rio de janeiro,RJ
+C01456,sao paulo,SP
+C01457,sao paulo,SP
+C01458,belo horizonte,MG
+C01459,manaus,AM
+C01460,rio de janeiro,RJ
+C01461,porto alegre,RS
+C01462,salvador,BA
+C01463,sao paulo,SP
+C01464,rio de janeiro,RJ
+C01465,fortaleza,CE
+C01466,curitiba,PR
+C01467,belo horizonte,MG
+C01468,sao paulo,SP
+C01469,curitiba,PR
+C01470,sao paulo,SP
+C01471,goiania,GO
+C01472,sao paulo,SP
+C01473,sao paulo,SP
+C01474,belo horizonte,MG
+C01475,salvador,BA
+C01476,belo horizonte,MG
+C01477,belo horizonte,MG
+C01478,belem,PA
+C01479,belo horizonte,MG
+C01480,belo horizonte,MG
+C01481,belo horizonte,MG
+C01482,sao paulo,SP
+C01483,recife,PE
+C01484,sao paulo,SP
+C01485,fortaleza,CE
+C01486,sao paulo,SP
+C01487,belem,PA
+C01488,belo horizonte,MG
+C01489,brasilia,DF
+C01490,belo horizonte,MG
+C01491,sao paulo,SP
+C01492,florianopolis,SC
+C01493,fortaleza,CE
+C01494,porto alegre,RS
+C01495,belo horizonte,MG
+C01496,fortaleza,CE
+C01497,florianopolis,SC
+C01498,fortaleza,CE
+C01499,rio de janeiro,RJ
+C01500,fortaleza,CE
+C01501,curitiba,PR
+C01502,manaus,AM
+C01503,rio de janeiro,RJ
+C01504,belo horizonte,MG
+C01505,florianopolis,SC
+C01506,belo horizonte,MG
+C01507,curitiba,PR
+C01508,belo horizonte,MG
+C01509,sao paulo,SP
+C01510,porto alegre,RS
+C01511,sao paulo,SP
+C01512,sao paulo,SP
+C01513,recife,PE
+C01514,porto alegre,RS
+C01515,brasilia,DF
+C01516,sao paulo,SP
+C01517,sao paulo,SP
+C01518,manaus,AM
+C01519,sao paulo,SP
+C01520,sao paulo,SP
+C01521,sao paulo,SP
+C01522,salvador,BA
+C01523,brasilia,DF
+C01524,porto alegre,RS
+C01525,curitiba,PR
+C01526,sao paulo,SP
+C01527,rio de janeiro,RJ
+C01528,belo horizonte,MG
+C01529,sao paulo,SP
+C01530,sao paulo,SP
+C01531,rio de janeiro,RJ
+C01532,sao paulo,SP
+C01533,salvador,BA
+C01534,curitiba,PR
+C01535,sao paulo,SP
+C01536,belo horizonte,MG
+C01537,porto alegre,RS
+C01538,porto alegre,RS
+C01539,florianopolis,SC
+C01540,belo horizonte,MG
+C01541,florianopolis,SC
+C01542,sao paulo,SP
+C01543,rio de janeiro,RJ
+C01544,sao paulo,SP
+C01545,belo horizonte,MG
+C01546,rio de janeiro,RJ
+C01547,sao paulo,SP
+C01548,porto alegre,RS
+C01549,rio de janeiro,RJ
+C01550,sao paulo,SP
+C01551,sao paulo,SP
+C01552,belo horizonte,MG
+C01553,rio de janeiro,RJ
+C01554,rio de janeiro,RJ
+C01555,sao paulo,SP
+C01556,porto alegre,RS
+C01557,goiania,GO
+C01558,belo horizonte,MG
+C01559,fortaleza,CE
+C01560,brasilia,DF
+C01561,belem,PA
+C01562,recife,PE
+C01563,brasilia,DF
+C01564,goiania,GO
+C01565,porto alegre,RS
+C01566,belo horizonte,MG
+C01567,sao paulo,SP
+C01568,sao paulo,SP
+C01569,belo horizonte,MG
+C01570,belo horizonte,MG
+C01571,rio de janeiro,RJ
+C01572,salvador,BA
+C01573,salvador,BA
+C01574,florianopolis,SC
+C01575,sao paulo,SP
+C01576,sao paulo,SP
+C01577,porto alegre,RS
+C01578,florianopolis,SC
+C01579,belem,PA
+C01580,brasilia,DF
+C01581,brasilia,DF
+C01582,rio de janeiro,RJ
+C01583,rio de janeiro,RJ
+C01584,sao paulo,SP
+C01585,recife,PE
+C01586,goiania,GO
+C01587,rio de janeiro,RJ
+C01588,salvador,BA
+C01589,sao paulo,SP
+C01590,sao paulo,SP
+C01591,sao paulo,SP
+C01592,sao paulo,SP
+C01593,manaus,AM
+C01594,rio de janeiro,RJ
+C01595,florianopolis,SC
+C01596,curitiba,PR
+C01597,sao paulo,SP
+C01598,sao paulo,SP
+C01599,florianopolis,SC
+C01600,sao paulo,SP
+C01601,goiania,GO
+C01602,sao paulo,SP
+C01603,curitiba,PR
+C01604,florianopolis,SC
+C01605,sao paulo,SP
+C01606,sao paulo,SP
+C01607,manaus,AM
+C01608,sao paulo,SP
+C01609,belo horizonte,MG
+C01610,belo horizonte,MG
+C01611,sao paulo,SP
+C01612,porto alegre,RS
+C01613,porto alegre,RS
+C01614,rio de janeiro,RJ
+C01615,florianopolis,SC
+C01616,sao paulo,SP
+C01617,sao paulo,SP
+C01618,salvador,BA
+C01619,belem,PA
+C01620,sao paulo,SP
+C01621,sao paulo,SP
+C01622,salvador,BA
+C01623,porto alegre,RS
+C01624,sao paulo,SP
+C01625,rio de janeiro,RJ
+C01626,porto alegre,RS
+C01627,rio de janeiro,RJ
+C01628,sao paulo,SP
+C01629,sao paulo,SP
+C01630,belo horizonte,MG
+C01631,belo horizonte,MG
+C01632,brasilia,DF
+C01633,fortaleza,CE
+C01634,curitiba,PR
+C01635,belem,PA
+C01636,belo horizonte,MG
+C01637,rio de janeiro,RJ
+C01638,goiania,GO
+C01639,sao paulo,SP
+C01640,curitiba,PR
+C01641,porto alegre,RS
+C01642,sao paulo,SP
+C01643,belo horizonte,MG
+C01644,sao paulo,SP
+C01645,sao paulo,SP
+C01646,belo horizonte,MG
+C01647,sao paulo,SP
+C01648,porto alegre,RS
+C01649,goiania,GO
+C01650,porto alegre,RS
+C01651,sao paulo,SP
+C01652,sao paulo,SP
+C01653,sao paulo,SP
+C01654,sao paulo,SP
+C01655,manaus,AM
+C01656,rio de janeiro,RJ
+C01657,sao paulo,SP
+C01658,florianopolis,SC
+C01659,rio de janeiro,RJ
+C01660,sao paulo,SP
+C01661,sao paulo,SP
+C01662,fortaleza,CE
+C01663,porto alegre,RS
+C01664,sao paulo,SP
+C01665,goiania,GO
+C01666,florianopolis,SC
+C01667,florianopolis,SC
+C01668,sao paulo,SP
+C01669,sao paulo,SP
+C01670,brasilia,DF
+C01671,rio de janeiro,RJ
+C01672,recife,PE
+C01673,porto alegre,RS
+C01674,sao paulo,SP
+C01675,porto alegre,RS
+C01676,goiania,GO
+C01677,curitiba,PR
+C01678,belo horizonte,MG
+C01679,brasilia,DF
+C01680,salvador,BA
+C01681,porto alegre,RS
+C01682,florianopolis,SC
+C01683,porto alegre,RS
+C01684,sao paulo,SP
+C01685,sao paulo,SP
+C01686,sao paulo,SP
+C01687,belo horizonte,MG
+C01688,belo horizonte,MG
+C01689,recife,PE
+C01690,rio de janeiro,RJ
+C01691,porto alegre,RS
+C01692,goiania,GO
+C01693,sao paulo,SP
+C01694,curitiba,PR
+C01695,curitiba,PR
+C01696,salvador,BA
+C01697,sao paulo,SP
+C01698,porto alegre,RS
+C01699,manaus,AM
+C01700,curitiba,PR
+C01701,goiania,GO
+C01702,belem,PA
+C01703,rio de janeiro,RJ
+C01704,fortaleza,CE
+C01705,belo horizonte,MG
+C01706,belem,PA
+C01707,sao paulo,SP
+C01708,belo horizonte,MG
+C01709,brasilia,DF
+C01710,sao paulo,SP
+C01711,porto alegre,RS
+C01712,rio de janeiro,RJ
+C01713,belem,PA
+C01714,brasilia,DF
+C01715,rio de janeiro,RJ
+C01716,porto alegre,RS
+C01717,rio de janeiro,RJ
+C01718,recife,PE
+C01719,fortaleza,CE
+C01720,florianopolis,SC
+C01721,sao paulo,SP
+C01722,sao paulo,SP
+C01723,curitiba,PR
+C01724,salvador,BA
+C01725,belo horizonte,MG
+C01726,sao paulo,SP
+C01727,rio de janeiro,RJ
+C01728,brasilia,DF
+C01729,sao paulo,SP
+C01730,rio de janeiro,RJ
+C01731,manaus,AM
+C01732,sao paulo,SP
+C01733,porto alegre,RS
+C01734,sao paulo,SP
+C01735,brasilia,DF
+C01736,porto alegre,RS
+C01737,brasilia,DF
+C01738,sao paulo,SP
+C01739,salvador,BA
+C01740,porto alegre,RS
+C01741,sao paulo,SP
+C01742,sao paulo,SP
+C01743,sao paulo,SP
+C01744,manaus,AM
+C01745,curitiba,PR
+C01746,fortaleza,CE
+C01747,porto alegre,RS
+C01748,salvador,BA
+C01749,belo horizonte,MG
+C01750,belo horizonte,MG
+C01751,fortaleza,CE
+C01752,sao paulo,SP
+C01753,brasilia,DF
+C01754,florianopolis,SC
+C01755,rio de janeiro,RJ
+C01756,salvador,BA
+C01757,sao paulo,SP
+C01758,belem,PA
+C01759,goiania,GO
+C01760,goiania,GO
+C01761,rio de janeiro,RJ
+C01762,sao paulo,SP
+C01763,sao paulo,SP
+C01764,sao paulo,SP
+C01765,sao paulo,SP
+C01766,sao paulo,SP
+C01767,belem,PA
+C01768,sao paulo,SP
+C01769,sao paulo,SP
+C01770,florianopolis,SC
+C01771,recife,PE
+C01772,porto alegre,RS
+C01773,fortaleza,CE
+C01774,brasilia,DF
+C01775,fortaleza,CE
+C01776,salvador,BA
+C01777,curitiba,PR
+C01778,belo horizonte,MG
+C01779,rio de janeiro,RJ
+C01780,belo horizonte,MG
+C01781,sao paulo,SP
+C01782,porto alegre,RS
+C01783,sao paulo,SP
+C01784,sao paulo,SP
+C01785,sao paulo,SP
+C01786,florianopolis,SC
+C01787,rio de janeiro,RJ
+C01788,curitiba,PR
+C01789,florianopolis,SC
+C01790,sao paulo,SP
+C01791,porto alegre,RS
+C01792,rio de janeiro,RJ
+C01793,sao paulo,SP
+C01794,curitiba,PR
+C01795,goiania,GO
+C01796,sao paulo,SP
+C01797,salvador,BA
+C01798,sao paulo,SP
+C01799,salvador,BA
+C01800,recife,PE
+C01801,recife,PE
+C01802,recife,PE
+C01803,sao paulo,SP
+C01804,curitiba,PR
+C01805,curitiba,PR
+C01806,curitiba,PR
+C01807,sao paulo,SP
+C01808,belo horizonte,MG
+C01809,rio de janeiro,RJ
+C01810,sao paulo,SP
+C01811,sao paulo,SP
+C01812,belo horizonte,MG
+C01813,porto alegre,RS
+C01814,sao paulo,SP
+C01815,florianopolis,SC
+C01816,salvador,BA
+C01817,porto alegre,RS
+C01818,belo horizonte,MG
+C01819,belo horizonte,MG
+C01820,recife,PE
+C01821,goiania,GO
+C01822,belo horizonte,MG
+C01823,salvador,BA
+C01824,recife,PE
+C01825,curitiba,PR
+C01826,sao paulo,SP
+C01827,salvador,BA
+C01828,belo horizonte,MG
+C01829,goiania,GO
+C01830,belo horizonte,MG
+C01831,belo horizonte,MG
+C01832,manaus,AM
+C01833,belo horizonte,MG
+C01834,sao paulo,SP
+C01835,sao paulo,SP
+C01836,sao paulo,SP
+C01837,sao paulo,SP
+C01838,belo horizonte,MG
+C01839,porto alegre,RS
+C01840,curitiba,PR
+C01841,sao paulo,SP
+C01842,salvador,BA
+C01843,sao paulo,SP
+C01844,manaus,AM
+C01845,sao paulo,SP
+C01846,recife,PE
+C01847,rio de janeiro,RJ
+C01848,fortaleza,CE
+C01849,belo horizonte,MG
+C01850,porto alegre,RS
+C01851,sao paulo,SP
+C01852,goiania,GO
+C01853,belo horizonte,MG
+C01854,porto alegre,RS
+C01855,florianopolis,SC
+C01856,belem,PA
+C01857,sao paulo,SP
+C01858,sao paulo,SP
+C01859,sao paulo,SP
+C01860,sao paulo,SP
+C01861,recife,PE
+C01862,belem,PA
+C01863,belem,PA
+C01864,salvador,BA
+C01865,fortaleza,CE
+C01866,florianopolis,SC
+C01867,goiania,GO
+C01868,sao paulo,SP
+C01869,salvador,BA
+C01870,florianopolis,SC
+C01871,rio de janeiro,RJ
+C01872,belo horizonte,MG
+C01873,belem,PA
+C01874,belem,PA
+C01875,goiania,GO
+C01876,porto alegre,RS
+C01877,sao paulo,SP
+C01878,rio de janeiro,RJ
+C01879,salvador,BA
+C01880,salvador,BA
+C01881,belo horizonte,MG
+C01882,fortaleza,CE
+C01883,rio de janeiro,RJ
+C01884,porto alegre,RS
+C01885,rio de janeiro,RJ
+C01886,rio de janeiro,RJ
+C01887,sao paulo,SP
+C01888,sao paulo,SP
+C01889,florianopolis,SC
+C01890,belo horizonte,MG
+C01891,sao paulo,SP
+C01892,porto alegre,RS
+C01893,salvador,BA
+C01894,sao paulo,SP
+C01895,rio de janeiro,RJ
+C01896,sao paulo,SP
+C01897,fortaleza,CE
+C01898,sao paulo,SP
+C01899,sao paulo,SP
+C01900,sao paulo,SP
+C01901,recife,PE
+C01902,sao paulo,SP
+C01903,florianopolis,SC
+C01904,sao paulo,SP
+C01905,recife,PE
+C01906,belo horizonte,MG
+C01907,belo horizonte,MG
+C01908,sao paulo,SP
+C01909,porto alegre,RS
+C01910,brasilia,DF
+C01911,sao paulo,SP
+C01912,sao paulo,SP
+C01913,goiania,GO
+C01914,salvador,BA
+C01915,sao paulo,SP
+C01916,sao paulo,SP
+C01917,fortaleza,CE
+C01918,curitiba,PR
+C01919,recife,PE
+C01920,manaus,AM
+C01921,belo horizonte,MG
+C01922,rio de janeiro,RJ
+C01923,belo horizonte,MG
+C01924,rio de janeiro,RJ
+C01925,sao paulo,SP
+C01926,sao paulo,SP
+C01927,rio de janeiro,RJ
+C01928,curitiba,PR
+C01929,sao paulo,SP
+C01930,belo horizonte,MG
+C01931,fortaleza,CE
+C01932,recife,PE
+C01933,porto alegre,RS
+C01934,florianopolis,SC
+C01935,curitiba,PR
+C01936,sao paulo,SP
+C01937,belo horizonte,MG
+C01938,recife,PE
+C01939,sao paulo,SP
+C01940,sao paulo,SP
+C01941,sao paulo,SP
+C01942,belo horizonte,MG
+C01943,belo horizonte,MG
+C01944,sao paulo,SP
+C01945,florianopolis,SC
+C01946,goiania,GO
+C01947,sao paulo,SP
+C01948,goiania,GO
+C01949,sao paulo,SP
+C01950,goiania,GO
+C01951,manaus,AM
+C01952,sao paulo,SP
+C01953,porto alegre,RS
+C01954,belem,PA
+C01955,goiania,GO
+C01956,belem,PA
+C01957,salvador,BA
+C01958,sao paulo,SP
+C01959,florianopolis,SC
+C01960,recife,PE
+C01961,recife,PE
+C01962,belo horizonte,MG
+C01963,salvador,BA
+C01964,sao paulo,SP
+C01965,curitiba,PR
+C01966,sao paulo,SP
+C01967,curitiba,PR
+C01968,florianopolis,SC
+C01969,belo horizonte,MG
+C01970,belo horizonte,MG
+C01971,rio de janeiro,RJ
+C01972,manaus,AM
+C01973,curitiba,PR
+C01974,rio de janeiro,RJ
+C01975,sao paulo,SP
+C01976,sao paulo,SP
+C01977,belo horizonte,MG
+C01978,manaus,AM
+C01979,curitiba,PR
+C01980,sao paulo,SP
+C01981,florianopolis,SC
+C01982,rio de janeiro,RJ
+C01983,florianopolis,SC
+C01984,sao paulo,SP
+C01985,recife,PE
+C01986,goiania,GO
+C01987,sao paulo,SP
+C01988,curitiba,PR
+C01989,belem,PA
+C01990,sao paulo,SP
+C01991,sao paulo,SP
+C01992,curitiba,PR
+C01993,rio de janeiro,RJ
+C01994,sao paulo,SP
+C01995,belo horizonte,MG
+C01996,porto alegre,RS
+C01997,sao paulo,SP
+C01998,rio de janeiro,RJ
+C01999,florianopolis,SC
+C02000,salvador,BA
