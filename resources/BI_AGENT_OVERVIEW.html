@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BI Agent: How It Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a teacher's wall chart, friendly and exact.
+   IDEA: a delivery route - data travels left to right, a question travels down a timeline.
+   PICTURE: icon-node system map (3 zones) + a swimlane trace of one real question.
+   COLOUR and TYPE: ConsoleFlare brand - near-black, purple, yellow accent; DM Sans.
+   LAYOUT: hero, system map, question trace, branch cards, files, safety layers, stack. */
+:root{color-scheme:dark;--bg:#0d0f12;--ink:#ffffff;--mute:#a7a7a7;--brand:#7833fe;--brand2:#652bd6;--soft:#c7aaff;--yellow:#ffd21f;--surface:#1a1a1a;--surface2:#2a2a2a;--red:#ff5a4e;--green:#3ddc97}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,4.6vw,52px);max-width:20ch}
+h1 span{color:var(--soft)}
+h2{font-size:clamp(24px,2.8vw,32px);margin-bottom:10px}
+h3{font-size:18px;margin-bottom:6px}
+p{max-width:70ch;margin:0 0 12px}
+.lead{color:var(--mute);font-size:17px;margin-top:14px}
+.pill{display:inline-block;background:var(--yellow);color:#0d0f12;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+.panel{background:var(--surface);border:1px solid var(--surface2);border-radius:18px;padding:clamp(12px,2vw,26px)}
+figure{margin:0}
+figcaption{color:var(--mute);font-size:14px;margin-top:12px;max-width:95ch}
+svg.d{width:100%;height:auto;display:block}
+.scrollfig{overflow-x:auto}
+.scrollfig svg{min-width:760px}
+/* svg text */
+.t1{font:700 15px "DM Sans",sans-serif;fill:#fff}
+.t2{font:400 12.5px "DM Sans",sans-serif;fill:var(--mute)}
+.tf{font:500 12px ui-monospace,Menlo,monospace;fill:var(--soft)}
+.tz{font:700 13px "DM Sans",sans-serif;fill:var(--yellow)}
+.tr{font:700 12.5px "DM Sans",sans-serif;fill:var(--red)}
+.tg{font:700 12.5px "DM Sans",sans-serif;fill:var(--green)}
+.zone{fill:#14161a;stroke:var(--surface2);stroke-width:1.5}
+.ln{fill:none;stroke:#cfc3f5;stroke-width:1.8}
+.lnr{fill:none;stroke:var(--red);stroke-width:1.8;stroke-dasharray:6 5}
+.life{stroke:var(--surface2);stroke-width:2;stroke-dasharray:4 6}
+.nb{fill:var(--brand)}.ny{fill:var(--yellow)}.nd{fill:#2a2340;stroke:var(--brand);stroke-width:2}
+.iw{color:#fff}.ik{color:#0d0f12}
+.note{fill:#201a33;stroke:#3a2f63}
+.noter{fill:#2a1517;stroke:#5a2a2c}
+.badge{fill:var(--bg);stroke:var(--brand);stroke-width:1.5}
+nav.scroll{display:flex;gap:8px;margin-top:22px;padding-bottom:4px;overflow-x:auto}
+nav a{flex:none;color:#fff;text-decoration:none;border:1px solid var(--surface2);border-radius:999px;padding:9px 16px;font-size:14px;min-height:40px;display:inline-flex;align-items:center}
+nav a:hover,nav a:focus-visible{background:var(--brand);border-color:var(--brand);outline:none}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--surface2);border-radius:16px;padding:18px}
+.card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;margin-bottom:10px;background:var(--brand)}
+.card .ic.y{background:var(--yellow)}.card .ic.r{background:#3a1a1c}
+.card .ic svg{width:24px;height:24px}
+.card code{font:13px ui-monospace,Menlo,monospace;color:var(--soft);overflow-wrap:anywhere}
+.card p{font-size:15px;color:#d6d6d6;margin:6px 0 0}
+.card .q{color:#fff;font-weight:700}
+.card .a{color:var(--mute);font-size:14px}
+.layers{display:grid;gap:10px}
+.layer{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--surface2);border-radius:14px;padding:12px 16px}
+.layer .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--brand)}
+.layer b{display:block}.layer span{color:var(--mute);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.chip{background:var(--surface);border:1px solid var(--surface2);border-radius:999px;padding:8px 14px;font-size:14px}
+.chip b{color:var(--soft);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;color:var(--mute);font-size:13px}
+.legend i{display:inline-block;width:22px;height:0;border-top:2px solid #cfc3f5;vertical-align:middle;margin-right:6px}
+.legend i.r{border-top:2px dashed var(--red)}
+html{scroll-padding-top:72px}
+@media(prefers-reduced-motion:no-preference){.flow{stroke-dasharray:6 6;animation:fl 1.6s linear infinite}@keyframes fl{to{stroke-dashoffset:-24}}}
+@media(max-width:600px){.layer{grid-template-columns:36px 1fr}.layer .n{width:36px;height:36px}}
+</style>
+</head>
+<body>
+<header class="band" style="padding-bottom:12px">
+ <div class="wrap">
+  <span class="pill">ConsoleFlare · Agentic AI Project</span>
+  <h1 style="margin-top:14px">AI Business Intelligence Agent: <span>how it works</span></h1>
+  <p class="lead">Ask a business question in plain English or Hinglish. The agent finds the right data across four sources, writes and runs safe SQL, and explains the answer, showing the SQL it used.</p>
+  <nav class="scroll" aria-label="Sections"><a href="#map">System map</a><a href="#trace">Watch a question travel</a><a href="#files">Project files</a><a href="#safety">Safety layers</a><a href="#stack">Tech stack</a></nav>
+ </div>
+</header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cfc3f5"/></marker>
+  <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#ff5a4e"/></marker>
+  <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3 3 7 3s7-1.3 7-3"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.5A3.3 3.3 0 0 0 7 18z"/></symbol>
+  <symbol id="i-csv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h1M12 13h1M15 13h1M9 17h1M12 17h1M15 17h1"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10H3z"/><path d="M7 20v-6h10v6M7 17h10"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6"/><circle cx="12" cy="3.5" r="1"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+  <symbol id="i-git" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 3-4 3-9.5 4.5"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3c4 2 6 6 5 11l-3 3h-4l-3-3c-1-5 1-9 5-11z"/><circle cx="12" cy="10" r="2"/><path d="M8 17l-2 4 4-2M16 17l2 4-4-2"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+ </defs>
+</svg>
+
+<!-- ======================= SYSTEM MAP ======================= -->
+<section class="band" id="map" style="padding-top:12px">
+ <div class="wrap panel">
+  <h2>The system map</h2>
+  <p style="color:var(--mute)">Three zones. Data is collected on the left, the agent thinks in the middle, and the user chats on the right.</p>
+  <figure class="scrollfig">
+  <svg class="d" viewBox="0 0 1200 640" role="img" aria-label="Four sources (SQL database, Excel, live Google Sheet, CSV) are read by loader.py into a read-only DuckDB warehouse. Three tools sit between the warehouse and the ReAct agent; run_sql is guarded. The agent uses a Groq LLM, a system prompt with data notes, and memory. The Streamlit app sends questions to the agent and shows answers with SQL to the user. The app is deployed from GitHub to Streamlit Cloud with secrets.">
+   <!-- zones -->
+   <rect class="zone" x="12" y="16" width="470" height="608" rx="18"/>
+   <rect class="zone" x="498" y="16" width="452" height="608" rx="18"/>
+   <rect class="zone" x="966" y="16" width="222" height="608" rx="18"/>
+   <text class="tz" x="36" y="48">1 · DATA</text><text class="t2" x="36" y="68">collected once by the loader</text>
+   <text class="tz" x="522" y="48">2 · AGENT</text><text class="t2" x="522" y="68">thinks, calls tools, explains</text>
+   <text class="tz" x="990" y="48">3 · APP</text><text class="t2" x="990" y="68">what the user sees</text>
+
+   <!-- sources -->
+   <g>
+    <circle cx="80" cy="140" r="30" fill="#2f6fde"/><use href="#i-db" x="66" y="126" width="28" height="28" class="iw"/>
+    <text class="t1" x="80" y="186" text-anchor="middle">SQL database</text><text class="tf" x="80" y="202" text-anchor="middle">sales.db</text>
+    <circle cx="80" cy="255" r="30" fill="#1d6f42"/><use href="#i-sheet" x="66" y="241" width="28" height="28" class="iw"/>
+    <text class="t1" x="80" y="301" text-anchor="middle">Excel</text><text class="tf" x="80" y="317" text-anchor="middle">targets_2018.xlsx</text>
+    <circle cx="80" cy="370" r="30" fill="#0f9d58"/><use href="#i-cloud" x="66" y="356" width="28" height="28" class="iw"/>
+    <text class="t1" x="80" y="416" text-anchor="middle">Google Sheet</text><text class="t2" x="80" y="432" text-anchor="middle">live link, online</text>
+    <circle cx="80" cy="485" r="30" fill="#6b7280"/><use href="#i-csv" x="66" y="471" width="28" height="28" class="iw"/>
+    <text class="t1" x="80" y="531" text-anchor="middle">CSV export</text><text class="tf" x="80" y="547" text-anchor="middle">order_reviews.csv</text>
+   </g>
+   <!-- source -> loader -->
+   <g class="ln" marker-end="url(#ah)">
+    <path d="M112 160Q230 220 262 296"/><path d="M112 262Q220 280 260 304"/><path d="M112 362Q220 335 260 316"/><path d="M112 470Q230 400 262 326"/>
+   </g>
+   <circle class="nb" cx="300" cy="312" r="34"/><use href="#i-funnel" x="284" y="296" width="32" height="32" class="iw"/>
+   <text class="t1" x="300" y="234" text-anchor="middle">Loader</text><text class="tf" x="300" y="251" text-anchor="middle">loader.py</text>
+   <text class="t2" x="300" y="268" text-anchor="middle">reads + fixes dates</text>
+   <!-- loader -> warehouse -->
+   <path class="ln flow" d="M336 312H376" marker-end="url(#ah)"/>
+   <circle class="nd" cx="420" cy="312" r="40"/><use href="#i-ware" x="400" y="292" width="40" height="40" class="iw"/>
+   <circle class="ny" cx="448" cy="282" r="13"/><use href="#i-lock" x="440" y="274" width="16" height="16" class="ik"/>
+   <text class="t1" x="420" y="376" text-anchor="middle">Warehouse</text><text class="tf" x="420" y="394" text-anchor="middle">warehouse.duckdb</text>
+   <text class="t2" x="420" y="412" text-anchor="middle">10 tables · read-only</text>
+
+   <!-- tools -->
+   <circle class="nb" cx="580" cy="200" r="28"/><use href="#i-list" x="567" y="187" width="26" height="26" class="iw"/>
+   <text class="tf" x="580" y="246" text-anchor="middle">list_tables()</text>
+   <circle class="nb" cx="580" cy="312" r="28"/><use href="#i-book" x="567" y="299" width="26" height="26" class="iw"/>
+   <text class="tf" x="580" y="358" text-anchor="middle">get_schema()</text>
+   <circle class="nb" cx="580" cy="424" r="28"/><use href="#i-code" x="567" y="411" width="26" height="26" class="iw"/>
+   <circle class="ny" cx="604" cy="400" r="13"/><use href="#i-shield" x="596" y="392" width="16" height="16" class="ik"/>
+   <text class="tf" x="580" y="470" text-anchor="middle">run_sql()</text>
+   <text class="t2" x="580" y="488" text-anchor="middle">guarded</text>
+   <text class="t1" x="580" y="150" text-anchor="middle">Tools</text><text class="tf" x="580" y="168" text-anchor="middle">tools.py</text>
+   <!-- warehouse <-> tools -->
+   <path class="ln" d="M460 300L548 210" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M462 312H548" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M460 324L548 414" marker-end="url(#ah)" marker-start="url(#ah)"/>
+
+   <!-- agent -->
+   <circle class="nd" cx="800" cy="312" r="48"/><use href="#i-bot" x="776" y="288" width="48" height="48" class="iw"/>
+   <text class="t1" x="800" y="384" text-anchor="middle">ReAct agent</text><text class="tf" x="800" y="402" text-anchor="middle">agent.py</text>
+   <text class="t2" x="800" y="420" text-anchor="middle">think → act → repeat</text>
+   <!-- tools <-> agent -->
+   <path class="ln" d="M610 205Q700 230 756 290" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M610 312H750" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M610 420Q700 395 756 336" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <text class="t2" x="680" y="302" text-anchor="middle">calls / results</text>
+   <!-- satellites -->
+   <circle class="nb" cx="730" cy="140" r="28"/><use href="#i-spark" x="717" y="127" width="26" height="26" class="iw"/>
+   <text class="t1" x="730" y="102" text-anchor="middle">LLM</text><text class="t2" x="730" y="86" text-anchor="middle">Groq · gpt-oss-120b</text>
+   <circle class="nb" cx="870" cy="140" r="28"/><use href="#i-doc" x="857" y="127" width="26" height="26" class="iw"/>
+   <text class="t1" x="870" y="102" text-anchor="middle">Prompt + notes</text><text class="tf" x="870" y="86" text-anchor="middle">data_notes.md</text>
+   <circle class="nb" cx="900" cy="500" r="28"/><use href="#i-clock" x="887" y="487" width="26" height="26" class="iw"/>
+   <text class="t1" x="900" y="548" text-anchor="middle">Memory</text><text class="tf" x="900" y="565" text-anchor="middle">memory.db</text>
+   <path class="ln" d="M745 165L778 270" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M855 165L822 270" marker-end="url(#ah)"/>
+   <path class="ln" d="M848 334L888 474" marker-end="url(#ah)" marker-start="url(#ah)"/>
+
+   <!-- app + user -->
+   <circle class="nd" cx="1040" cy="312" r="40"/><use href="#i-chat" x="1020" y="292" width="40" height="40" class="iw"/>
+   <text class="t1" x="1040" y="376" text-anchor="middle">Chat app</text><text class="tf" x="1040" y="394" text-anchor="middle">app.py · Streamlit</text>
+   <circle class="ny" cx="1130" cy="190" r="28"/><use href="#i-user" x="1117" y="177" width="26" height="26" class="ik"/>
+   <text class="t1" x="1130" y="244" text-anchor="middle">User</text><text class="t2" x="1130" y="262" text-anchor="middle">no SQL needed</text>
+   <path class="ln" d="M1108 208L1068 282" marker-end="url(#ah)" marker-start="url(#ah)"/>
+   <path class="ln" d="M850 300H998" marker-end="url(#ah)"/>
+   <path class="ln" d="M998 326H850" marker-end="url(#ah)"/>
+   <text class="t2" x="924" y="292" text-anchor="middle">answer + SQL</text>
+   <text class="t2" x="924" y="344" text-anchor="middle">question</text>
+   <text class="t2" x="990" y="430">• history sidebar</text>
+   <text class="t2" x="990" y="448">• English / Hinglish</text>
+   <text class="t2" x="990" y="466">• Show SQL panel</text>
+   <text class="t2" x="990" y="484">• ConsoleFlare theme</text>
+   <!-- deploy strip -->
+   <line x1="990" y1="508" x2="1166" y2="508" stroke="#2a2a2a"/>
+   <circle class="nb" cx="1010" cy="560" r="20"/><use href="#i-git" x="1000" y="550" width="20" height="20" class="iw"/>
+   <circle class="nb" cx="1080" cy="560" r="20"/><use href="#i-rocket" x="1070" y="550" width="20" height="20" class="iw"/>
+   <circle class="ny" cx="1150" cy="560" r="20"/><use href="#i-key" x="1140" y="550" width="20" height="20" class="ik"/>
+   <path class="ln" d="M1032 560H1056" marker-end="url(#ah)"/><path class="ln" d="M1128 560H1102" marker-end="url(#ah)"/>
+   <text class="t2" x="1010" y="598" text-anchor="middle">GitHub</text><text class="t2" x="1080" y="598" text-anchor="middle">Streamlit</text><text class="t2" x="1150" y="598" text-anchor="middle">Secrets</text>
+  </svg>
+  <figcaption>The agent never touches the source files directly. It only sees the warehouse, only through three tools, and the one tool that runs SQL is guarded and read-only.</figcaption>
+  </figure>
+ </div>
+</section>
+
+<!-- ======================= LIVE TRACE ======================= -->
+<style>
+#trace .stage{position:relative;background:#121418;border:1px solid var(--surface2);border-radius:16px;overflow-x:auto}
+#trace .stage svg{display:block;width:100%;min-width:680px;height:auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tab{font:600 14px "DM Sans",sans-serif;color:#fff;background:var(--surface);border:1px solid var(--surface2);border-radius:999px;padding:0 16px;min-height:42px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.tab[aria-selected=true]{background:var(--brand);border-color:var(--brand)}
+.tab:focus-visible,.ctl:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.tab i{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.tab[data-k=error] i{background:var(--yellow)}.tab[data-k=delete] i,.tab[data-k=offtopic] i{background:var(--red)}.tab[data-k=vague] i{background:var(--soft)}
+.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
+.ctl{width:48px;height:48px;border-radius:50%;border:1px solid var(--surface2);background:var(--surface);color:#fff;font-size:18px;cursor:pointer;display:grid;place-items:center}
+.ctl.play{background:var(--brand);border-color:var(--brand);width:56px;height:56px;font-size:20px}
+.ctl svg{width:22px;height:22px}
+.cap{flex:1;min-width:220px}
+.cap .num{color:var(--yellow);font-weight:700;font-size:14px}
+.cap .txt{font-size:clamp(19px,2.2vw,24px);font-weight:700;line-height:1.2}
+.dots{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.dots button{width:22px;height:8px;border-radius:999px;border:0;background:var(--surface2);cursor:pointer;padding:0}
+.dots button.on{background:var(--brand)}.dots button.cur{background:var(--yellow)}
+.actor .ring{fill:none;stroke:var(--brand);stroke-width:3;opacity:0}
+.actor.active .ring{opacity:1;animation:pulse 1.2s ease-out infinite}
+.actor.dim{opacity:.25}
+@keyframes pulse{0%{stroke-width:3;opacity:.9}100%{stroke-width:14;opacity:0}}
+.alab{font:700 16px "DM Sans",sans-serif;fill:#fff}
+.track{stroke:#262a31;stroke-width:2;stroke-dasharray:3 7}
+#pkt .core{fill:var(--yellow)}#pkt .glow{fill:var(--yellow);opacity:.25}
+#pkt.bad .core,#pkt.bad .glow{fill:var(--red)}
+#pill rect{fill:#fff}#pill text{font:700 13px "DM Sans",sans-serif;fill:#0d0f12}
+#pkt.bad + #pill rect,#pill.bad rect{fill:var(--red)}#pill.bad text{fill:#fff}
+#bub rect{fill:#2a2340;stroke:var(--brand)}#bub text{font:700 14px "DM Sans",sans-serif;fill:#fff}
+#bub.ok rect{fill:#10291f;stroke:var(--green)}#bub.ok text{fill:var(--green)}
+#bub.bad rect{fill:#2a1517;stroke:var(--red)}#bub.bad text{fill:var(--red)}
+.trail{fill:none;stroke:var(--yellow);stroke-width:2.5;stroke-dasharray:4 6;opacity:.7}
+.trail.bad{stroke:var(--red)}
+#shieldBg{fill:var(--yellow);transition:fill .3s}#shieldBg.ok{fill:var(--green)}#shieldBg.bad{fill:var(--red)}
+#memBg{transition:fill .3s}
+@media(prefers-reduced-motion:reduce){.actor.active .ring{animation:none;opacity:1}}
+</style>
+
+<section class="band" id="trace" style="padding-top:0">
+ <div class="wrap panel">
+  <h2>Watch a question travel</h2>
+  <p style="color:var(--mute)">Pick a scenario and press play. The yellow dot is the message moving through the system.</p>
+
+  <div class="tabs" role="tablist" aria-label="Scenarios">
+   <button class="tab" role="tab" data-k="normal" aria-selected="true"><i></i>Normal question</button>
+   <button class="tab" role="tab" data-k="error" aria-selected="false"><i></i>SQL error</button>
+   <button class="tab" role="tab" data-k="delete" aria-selected="false"><i></i>Delete request</button>
+   <button class="tab" role="tab" data-k="vague" aria-selected="false"><i></i>Vague question</button>
+   <button class="tab" role="tab" data-k="offtopic" aria-selected="false"><i></i>Off-topic</button>
+  </div>
+
+  <div class="stage">
+   <svg id="flow" viewBox="0 0 1000 360" role="img" aria-label="Animated flow of a question between the user, chat app, agent, tools and DuckDB">
+    <line class="track" x1="80" y1="180" x2="920" y2="180"/>
+    <g id="trails"></g>
+    <!-- LLM + memory satellites -->
+    <g class="actor" id="n-llm">
+     <line x1="500" y1="96" x2="500" y2="138" stroke="#3a3350" stroke-width="2"/>
+     <circle class="ring" cx="500" cy="68" r="26"/><circle cx="500" cy="68" r="26" fill="#3b2a7a"/>
+     <use href="#i-spark" x="487" y="55" width="26" height="26" class="iw"/>
+     <text class="t2" x="540" y="73">LLM</text>
+    </g>
+    <g class="actor" id="n-mem">
+     <line x1="500" y1="222" x2="500" y2="268" stroke="#3a3350" stroke-width="2"/>
+     <circle class="ring" cx="500" cy="296" r="26"/><circle id="memBg" cx="500" cy="296" r="26" fill="#3b2a7a"/>
+     <use href="#i-clock" x="487" y="283" width="26" height="26" class="iw"/>
+     <text class="t2" x="540" y="301">Memory</text>
+    </g>
+    <!-- main actors -->
+    <g class="actor" id="n-user"><circle class="ring" cx="80" cy="180" r="38"/><circle cx="80" cy="180" r="38" fill="#ffd21f"/><use href="#i-user" x="62" y="162" width="36" height="36" class="ik"/><text class="alab" x="80" y="246" text-anchor="middle">You</text></g>
+    <g class="actor" id="n-app"><circle class="ring" cx="290" cy="180" r="38"/><circle cx="290" cy="180" r="38" fill="#7833fe"/><use href="#i-chat" x="272" y="162" width="36" height="36" class="iw"/><text class="alab" x="290" y="246" text-anchor="middle">Chat app</text></g>
+    <g class="actor" id="n-agent"><circle class="ring" cx="500" cy="180" r="42"/><circle cx="500" cy="180" r="42" fill="#2a2340" stroke="#7833fe" stroke-width="3"/><use href="#i-bot" x="480" y="160" width="40" height="40" class="iw"/><text class="alab" x="552" y="186" style="paint-order:stroke;stroke:#121418;stroke-width:8px">Agent</text></g>
+    <g class="actor" id="n-tools"><circle class="ring" cx="710" cy="180" r="38"/><circle cx="710" cy="180" r="38" fill="#7833fe"/><use href="#i-code" x="692" y="162" width="36" height="36" class="iw"/>
+     <circle id="shieldBg" cx="738" cy="152" r="15"/><use href="#i-shield" x="729" y="143" width="18" height="18" class="ik"/>
+     <text class="alab" x="710" y="246" text-anchor="middle">Tools</text></g>
+    <g class="actor" id="n-db"><circle class="ring" cx="920" cy="180" r="38"/><circle cx="920" cy="180" r="38" fill="#2f6fde"/><use href="#i-db" x="902" y="162" width="36" height="36" class="iw"/>
+     <circle cx="948" cy="152" r="14" fill="#ffd21f"/><use href="#i-lock" x="940" y="144" width="16" height="16" class="ik"/>
+     <text class="alab" x="920" y="246" text-anchor="middle">DuckDB</text></g>
+    <!-- moving parts -->
+    <g id="bub" style="display:none"><rect rx="12" height="34"/><text y="23"></text></g>
+    <g id="pkt" style="display:none"><circle class="glow" r="18"/><circle class="core" r="8"/></g>
+    <g id="pill" style="display:none"><rect rx="10" height="26"/><text y="18"></text></g>
+   </svg>
+  </div>
+
+  <div class="bar">
+   <button class="ctl" id="prev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 5L7 12l8 7z"/></svg></button>
+   <button class="ctl play" id="play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor" id="playIc"><path d="M8 5l11 7-11 7z"/></svg></button>
+   <button class="ctl" id="next" aria-label="Next step"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 5l8 7-8 7z"/></svg></button>
+   <div class="cap" aria-live="polite"><div class="num" id="num"></div><div class="txt" id="txt"></div></div>
+  </div>
+  <div class="dots" id="dots"></div>
+ </div>
+</section>
+
+<script>
+{
+const P = {user:[80,180], app:[290,180], agent:[500,180], tools:[710,180], db:[920,180], llm:[500,68], mem:[500,296]};
+// step: [from, to, payload, caption, kind]   kind: ok (default) | bad | think | guard-ok | guard-bad | mem
+const S = {
+ normal: [
+  ["user","app","Why did revenue drop in June?","You ask in plain English or Hinglish"],
+  ["app","agent","question + chat id","The app hands it to the agent"],
+  ["agent","agent","Which tables do I need?","The agent thinks","think"],
+  ["agent","tools","list_tables()","It asks what data exists"],
+  ["tools","agent","10 tables","The tool lists the tables"],
+  ["agent","tools","get_schema('orders')","It checks the columns first"],
+  ["tools","agent","columns + 3 rows","No guessing column names"],
+  ["agent","tools","SELECT revenue …","It writes SQL and sends it"],
+  ["tools","tools","SELECT only ✓  LIMIT 200 ✓","The guard checks the SQL","guard-ok"],
+  ["tools","db","read-only query","The query runs on DuckDB"],
+  ["db","tools","rows","Data comes back"],
+  ["tools","agent","result table","The result reaches the agent"],
+  ["agent","agent","Facts vs possible reasons","It explains in simple words","think"],
+  ["agent","app","answer + SQL","The answer goes to the app"],
+  ["app","user","answer · Show SQL","You see the answer and the SQL used"]
+ ],
+ error: [
+  ["user","app","Revenue by region in June?","You ask a question"],
+  ["app","agent","question + chat id","The app hands it to the agent"],
+  ["agent","tools","SELECT region …","It sends SQL with a wrong column"],
+  ["tools","tools","SELECT only ✓","The guard allows it","guard-ok"],
+  ["tools","db","read-only query","The query runs"],
+  ["db","tools","ERROR: no column 'region'","DuckDB returns an error","bad"],
+  ["tools","agent","ERROR + hint","The error comes back as text","bad"],
+  ["agent","agent","Fix: join region_map","The agent fixes its own SQL","think"],
+  ["agent","tools","SELECT … JOIN region_map","It tries again"],
+  ["tools","db","read-only query","This time it works"],
+  ["db","tools","rows","Data comes back"],
+  ["tools","agent","result table","The result reaches the agent"],
+  ["agent","app","answer + SQL","The answer goes to the app"],
+  ["app","user","answer · Show SQL","You get the right answer"]
+ ],
+ delete: [
+  ["user","app","Delete canceled orders","Someone asks to change data"],
+  ["app","agent","question + chat id","The app hands it to the agent"],
+  ["agent","tools","DELETE FROM orders …","SQL reaches the tool"],
+  ["tools","tools","BLOCKED ✕","The guard stops it","guard-bad"],
+  ["tools","agent","BLOCKED","The database is never touched","bad"],
+  ["agent","app","I can only read data","The agent explains politely"],
+  ["app","user","read-only","Your data stays safe"]
+ ],
+ vague: [
+  ["user","app","How are sales doing?","A vague question"],
+  ["app","agent","question + chat id","The app hands it to the agent"],
+  ["agent","agent","Metric? Period?","Not enough detail","think"],
+  ["agent","app","Revenue or orders? Which month?","It asks one short question back"],
+  ["app","user","question back","You see the question"],
+  ["user","app","Revenue, May vs June","You reply"],
+  ["app","agent","reply + same chat id","Same chat, so…"],
+  ["mem","agent","first question","Memory brings back the first question","mem"],
+  ["agent","tools","SELECT revenue …","Now it can query"],
+  ["tools","agent","result table","Data comes back"],
+  ["agent","app","answer + SQL","The answer goes to the app"],
+  ["app","user","answer · Show SQL","Complete answer"]
+ ],
+ offtopic: [
+  ["user","app","What is India?","An off-topic question"],
+  ["app","agent","question + chat id","The app hands it to the agent"],
+  ["agent","agent","Not about our data","The scope rule kicks in","think"],
+  ["agent","app","I only answer data questions","It refuses politely, no tools used"],
+  ["app","user","try: revenue by month?","And suggests a data question"]
+ ]
+};
+const DIM = {offtopic:["tools","db"], delete:["db"]};
+
+const $ = id => document.getElementById(id);
+const pkt=$("pkt"), pill=$("pill"), bub=$("bub"), trails=$("trails"), shield=$("shieldBg");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let key="normal", i=0, playing=false, timer=null, anim=null, seen=false;
+
+function pathFor(a,b){
+  const [x1,y1]=P[a],[x2,y2]=P[b];
+  if(a==="mem") return `M${x1} ${y1-28}L${x2} ${y2+44}`;
+  const fwd = x2>x1, lift = Math.min(110, 40+Math.abs(x2-x1)*0.3);
+  const cy = fwd ? y1-lift : y1+lift;
+  const off = fwd ? -40 : 40;
+  return `M${x1} ${y1+off}Q${(x1+x2)/2} ${cy} ${x2} ${y2+off}`;
+}
+function setPill(text,x,y,bad,side){
+  const t=pill.querySelector("text"), r=pill.querySelector("rect");
+  t.textContent=text; const w=t.getComputedTextLength()+22;
+  r.setAttribute("width",w); t.setAttribute("x",11);
+  const cx=side?x+30:Math.max(4,Math.min(996-w,x-w/2));
+  pill.setAttribute("transform",`translate(${cx},${side?y-13:y-48})`);
+  pill.classList.toggle("bad",!!bad); pill.style.display="";
+}
+function showBubble(node,text,cls){
+  const t=bub.querySelector("text"), r=bub.querySelector("rect");
+  t.textContent=text; const w=t.getComputedTextLength()+28;
+  r.setAttribute("width",w); t.setAttribute("x",14);
+  const [x,y]=P[node]; const by = node==="agent" ? 96 : y-104;
+  bub.setAttribute("transform",`translate(${Math.max(4,Math.min(996-w,x-w/2))},${by})`);
+  bub.setAttribute("class",cls||""); bub.style.display="";
+}
+function activate(ids){
+  document.querySelectorAll("#flow .actor").forEach(g=>g.classList.toggle("active",ids.includes(g.id.slice(2))));
+}
+function render(){
+  const steps=S[key];
+  cancelAnimationFrame(anim); pkt.style.display="none"; pill.style.display="none"; bub.style.display="none";
+  shield.setAttribute("class",""); $("memBg").setAttribute("fill","#3b2a7a");
+  document.querySelectorAll("#flow .actor").forEach(g=>g.classList.toggle("dim",(DIM[key]||[]).includes(g.id.slice(2))));
+  // past trails
+  trails.innerHTML = steps.slice(0,i).filter(s=>s[0]!==s[1]).map(s=>`<path class="trail${s[4]==="bad"?" bad":""}" d="${pathFor(s[0],s[1])}" style="opacity:.18"/>`).join("");
+  const [a,b,payload,cap,kind]=steps[i];
+  $("num").textContent=`Step ${i+1} of ${steps.length}`;
+  $("txt").textContent=cap;
+  $("dots").innerHTML=steps.map((_,k)=>`<button aria-label="Step ${k+1}" class="${k<i?"on":k===i?"cur":""}" data-i="${k}"></button>`).join("");
+  if(a===b){ // thinking or guard
+    activate(kind==="think"?[a,"llm"]:[a]);
+    if(kind==="guard-ok") shield.setAttribute("class","ok");
+    if(kind==="guard-bad") shield.setAttribute("class","bad");
+    showBubble(a,payload,kind==="guard-ok"?"ok":kind==="guard-bad"?"bad":""); follow(P[a][0]);
+    return done();
+  }
+  if(kind==="mem") $("memBg").setAttribute("fill","#ffd21f");
+  activate([a]);
+  const d=pathFor(a,b), tmp=document.createElementNS("http://www.w3.org/2000/svg","path");
+  tmp.setAttribute("d",d); tmp.setAttribute("class","trail"+(kind==="bad"?" bad":"")); trails.appendChild(tmp);
+  const len=tmp.getTotalLength(); pkt.setAttribute("class",kind==="bad"?"bad":""); pkt.style.display="";
+  const dur=reduce?0:1100, t0=performance.now();
+  tmp.style.strokeDasharray=`${len}`; tmp.style.strokeDashoffset=`${len}`;
+  const frame=now=>{
+    const p=dur?Math.min(1,(now-t0)/dur):1, e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    const pt=tmp.getPointAtLength(len*e);
+    pkt.setAttribute("transform",`translate(${pt.x},${pt.y})`);
+    setPill(payload,pt.x,pt.y,kind==="bad",a==="mem");
+    follow(pt.x);
+    tmp.style.strokeDashoffset=`${len*(1-e)}`;
+    if(p<1){anim=requestAnimationFrame(frame);}else{tmp.style.strokeDasharray="4 6";tmp.style.strokeDashoffset="0";activate([b]);done();}
+  };
+  anim=requestAnimationFrame(frame);
+}
+function follow(x){ const st=document.querySelector("#trace .stage"); if(st.scrollWidth<=st.clientWidth) return; const sc=$("flow").clientWidth/1000; st.scrollLeft=x*sc-st.clientWidth/2; }
+function done(){ clearTimeout(timer); if(playing) timer=setTimeout(()=>{ if(i<S[key].length-1){i++;render();} else setPlay(false); }, reduce?1800:1300); }
+function setPlay(on){
+  playing=on; $("play").setAttribute("aria-label",on?"Pause":"Play");
+  $("playIc").innerHTML = on ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>' : '<path d="M8 5l11 7-11 7z"/>';
+  clearTimeout(timer);
+  if(on){ if(i>=S[key].length-1) i=0; render(); }
+}
+function go(n){ setPlay(false); i=Math.max(0,Math.min(S[key].length-1,n)); render(); }
+$("play").addEventListener("click",()=>setPlay(!playing));
+$("next").addEventListener("click",()=>go(i+1));
+$("prev").addEventListener("click",()=>go(i-1));
+$("dots").addEventListener("click",e=>{ if(e.target.dataset.i) go(+e.target.dataset.i); });
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+  key=t.dataset.k; i=0; setPlay(true);
+}));
+document.addEventListener("keydown",e=>{
+  const r=$("trace").getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+  if(e.key==="ArrowRight") go(i+1); if(e.key==="ArrowLeft") go(i-1);
+});
+render();
+const io=new IntersectionObserver(es=>{ if(es[0].isIntersecting && !seen){ seen=true; setPlay(true); } },{threshold:.4});
+io.observe($("flow"));
+}
+</script>
+
+<!-- ======================= FILES ======================= -->
+<section class="band" id="files" style="padding-top:0">
+ <div class="wrap">
+  <h2>Project files: one job each</h2>
+  <div class="grid3" style="margin-top:14px">
+   <div class="card"><div class="ic"><svg aria-hidden="true"><use href="#i-funnel" class="iw"/></svg></div><code>loader.py</code><p>Reads the 4 sources (including the live Google Sheet link), fixes dates and saves 10 tables into <code>warehouse.duckdb</code>.</p></div>
+   <div class="card"><div class="ic"><svg aria-hidden="true"><use href="#i-doc" class="iw"/></svg></div><code>data_notes.md</code><p>The agent's briefing: tables, joins, business definitions (like revenue) and known data problems.</p></div>
+   <div class="card"><div class="ic"><svg aria-hidden="true"><use href="#i-code" class="iw"/></svg></div><code>tools.py</code><p>Three <code>@tool</code> functions: <code>list_tables</code>, <code>get_schema</code> and <code>run_sql</code> with safety checks.</p></div>
+   <div class="card"><div class="ic"><svg aria-hidden="true"><use href="#i-bot" class="iw"/></svg></div><code>agent.py</code><p>ChatGroq LLM + system prompt + data notes + tools + memory, joined by <code>create_agent</code>.</p></div>
+   <div class="card"><div class="ic"><svg aria-hidden="true"><use href="#i-chat" class="iw"/></svg></div><code>app.py</code><p>The Streamlit chat: history sidebar, English/Hinglish switch, example questions, Show SQL. Builds the warehouse if it's missing.</p></div>
+   <div class="card"><div class="ic y"><svg aria-hidden="true"><use href="#i-key" class="ik"/></svg></div><code>.env · .streamlit/</code><p>Secrets (Groq key, sheet link) kept out of code, plus the ConsoleFlare theme and logo.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ======================= SAFETY ======================= -->
+<section class="band" id="safety" style="padding-top:0">
+ <div class="wrap">
+  <h2>Safety in layers</h2>
+  <p style="color:var(--mute)">No single check is trusted alone. Each layer catches what the one before might miss.</p>
+  <div class="layers" style="margin-top:14px">
+   <div class="layer"><div class="n">1</div><div><b>Scope rule in the prompt</b><span>Only answers questions about the company data.</span></div></div>
+   <div class="layer"><div class="n">2</div><div><b>Look before writing</b><span>Must check tables and schemas, never guess column names.</span></div></div>
+   <div class="layer"><div class="n">3</div><div><b>SQL guard</b><span>SELECT/WITH only, one statement, dangerous words blocked.</span></div></div>
+   <div class="layer"><div class="n">4</div><div><b>Row limit</b><span>Adds LIMIT 200 so huge results never reach the LLM.</span></div></div>
+   <div class="layer"><div class="n">5</div><div><b>Read-only database</b><span>DuckDB itself refuses any write, even if a check had a bug.</span></div></div>
+   <div class="layer"><div class="n">6</div><div><b>Honest answers</b><span>Facts kept separate from possible reasons; numbers only from query results; tables used are listed.</span></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- ======================= STACK ======================= -->
+<section class="band" id="stack" style="padding-top:0">
+ <div class="wrap panel">
+  <h2>Tech stack</h2>
+  <div class="chips">
+   <span class="chip"><b>LangChain</b> create_agent · @tool</span>
+   <span class="chip"><b>Groq</b> ChatGroq LLM</span>
+   <span class="chip"><b>LangGraph checkpoint</b> memory</span>
+   <span class="chip"><b>pandas</b> reads sources</span>
+   <span class="chip"><b>DuckDB</b> warehouse</span>
+   <span class="chip"><b>SQLite</b> source database</span>
+   <span class="chip"><b>openpyxl</b> Excel</span>
+   <span class="chip"><b>Google Sheets</b> live CSV link</span>
+   <span class="chip"><b>Streamlit</b> chat UI + hosting</span>
+   <span class="chip"><b>GitHub</b> code + deploys</span>
+   <span class="chip"><b>python-dotenv</b> secrets</span>
+  </div>
+ </div>
+</section>
+</body>
+</html>

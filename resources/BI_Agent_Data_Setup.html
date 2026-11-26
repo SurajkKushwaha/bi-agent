@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BI Agent: Data Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a data engineer showing the plumbing, friendly and concrete. (static page, no animation)
+   IDEA: a funnel - four messy sources pour through one machine into one tidy warehouse.
+   PICTURE: source cards -> loader machine -> warehouse tiles; tables fly down and fill the slots.
+   COLOUR and TYPE: ConsoleFlare near-black, purple, yellow; source colours blue/green/green/grey; DM Sans.
+   LAYOUT: hero, funnel stage, checks, data notes preview, hand-off to tools. */
+:root{color-scheme:dark;--bg:#0d0f12;--ink:#fff;--mute:#a7a7a7;--brand:#7833fe;--soft:#c7aaff;--yellow:#ffd21f;--surface:#1a1a1a;--surface2:#2a2a2a;--green:#3ddc97;--red:#ff5a4e;
+ --sql:#2f6fde;--xls:#1d6f42;--gs:#0f9d58;--csv:#6b7280}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,4.6vw,52px);max-width:20ch}
+h1 span{color:var(--soft)}
+h2{font-size:clamp(24px,2.8vw,32px)}
+h3{font-size:17px}
+p{max-width:68ch;margin:0}
+.lead{color:var(--mute);font-size:17px;margin-top:14px}
+.sub{color:var(--mute);margin-top:6px}
+.pill{display:inline-block;background:var(--yellow);color:#0d0f12;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+code,.mono{font:13px ui-monospace,Menlo,monospace}
+svg.i{width:22px;height:22px;flex:none}
+
+/* ---------- funnel stage ---------- */
+.stage{position:relative;background:#121418;border:1px solid var(--surface2);border-radius:22px;padding:clamp(14px,2.4vw,28px);margin-top:20px}
+.rowlab{display:flex;align-items:center;gap:10px;color:var(--yellow);font-weight:700;font-size:13px;margin-bottom:10px}
+.rowlab span{color:var(--mute);font-weight:500}
+.sources{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.sources{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.src{border-radius:16px;padding:14px;background:var(--surface);border-top:5px solid var(--c)}
+.src .hd{display:flex;align-items:center;gap:10px}
+.src .bub{width:40px;height:40px;border-radius:12px;background:var(--c);display:grid;place-items:center;flex:none}
+.src .bub svg{width:22px;height:22px;color:#fff}
+.src b{display:block;font-size:15px}
+.src .fn{color:var(--soft);font:12px ui-monospace,Menlo,monospace;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tchip{font:600 12px "DM Sans",sans-serif;background:#262a31;border-radius:8px;padding:4px 8px;}
+.tchip.gone{opacity:.25}
+.pipe{height:34px;display:flex;justify-content:center}
+.pipe i{width:4px;border-radius:4px;background:linear-gradient(var(--surface2),var(--brand))}
+.machine{max-width:760px;margin:0 auto;border-radius:20px;padding:16px;background:linear-gradient(160deg,#2a1d55,#1c1438);border:2px solid var(--brand);position:relative}
+.machine .top{display:flex;align-items:center;gap:12px;justify-content:center}
+.machine .gear{width:46px;height:46px;border-radius:14px;background:var(--brand);display:grid;place-items:center}
+.machine .gear svg{width:26px;height:26px;color:#fff}
+.machine h3{font-size:20px}
+.mst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+@media(max-width:640px){.mst{grid-template-columns:1fr}}
+.ms{background:rgba(0,0,0,.25);border:1px solid #3a2f63;border-radius:14px;padding:12px;text-align:center;}
+.ms.on{border-color:var(--yellow);background:rgba(255,210,31,.08)}
+.ms .k{font-weight:700}
+.ms .v{color:var(--mute);font-size:13px;margin-top:4px}
+.datefix{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;font:12px ui-monospace,Menlo,monospace;flex-wrap:wrap}
+.datefix .bad{background:#3a1a1c;color:#ff9b93;border-radius:6px;padding:2px 6px}
+.datefix .ok{background:#123326;color:var(--green);border-radius:6px;padding:2px 6px}
+.wh{border-radius:20px;border:2px solid #3a7ef0;background:#101a2c;padding:16px}
+.wh .hd{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.wh .hd .ic{width:46px;height:46px;border-radius:14px;background:#2f6fde;display:grid;place-items:center}
+.wh .hd .ic svg{width:26px;height:26px;color:#fff}
+.lock{margin-left:auto;display:flex;align-items:center;gap:6px;background:var(--yellow);color:#0d0f12;font-weight:700;font-size:13px;border-radius:999px;padding:5px 12px}
+.lock svg{width:16px;height:16px}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}
+@media(max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{border:2px dashed #2c3b58;border-radius:14px;padding:10px 12px;min-height:74px;}
+.tile .nm{font:600 13px ui-monospace,Menlo,monospace;color:#8ea6cf}
+.tile .rows{font-size:22px;font-weight:700;color:#3a4a66;margin-top:2px}
+.tile .from{font-size:11px;color:var(--mute)}
+.tile.full{border-style:solid;border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,#101a2c)}
+.tile.full .nm{color:#fff}.tile.full .rows{color:#fff}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.btn{font:700 15px "DM Sans",sans-serif;border-radius:999px;min-height:46px;padding:0 20px;border:1px solid var(--surface2);background:var(--surface);color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.main{background:var(--brand);border-color:var(--brand)}
+.btn:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.btn svg{width:18px;height:18px}
+.status{text-align:center;color:var(--mute);font-size:14px;margin-top:10px;min-height:22px}
+
+/* ---------- checks ---------- */
+.checks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}
+@media(max-width:1000px){.checks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.checks{grid-template-columns:1fr}}
+.ck{background:var(--surface);border:1.5px solid var(--surface2);border-radius:16px;padding:16px;display:grid;grid-template-rows:auto 1fr auto;gap:12px;}
+.ck .top{display:flex;align-items:center;gap:10px}
+.ck .badge{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:14px;background:#262a31;color:var(--mute);}
+.ck .badge svg{width:16px;height:16px;display:none}
+.ck .q{font-weight:700;line-height:1.25}
+.ck pre{margin:0;min-height:62px;display:flex;align-items:center;background:#0b0d0f;border:1px solid var(--surface2);border-radius:10px;padding:10px 12px;font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#d8d8d8;white-space:pre;overflow-x:auto}
+.ck .res{height:34px;border-radius:999px;display:flex;align-items:center;gap:8px;padding:0 12px;font-size:13.5px;font-weight:700;background:#202329;color:#6c727c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck .res .dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.ck.run{border-color:var(--yellow);box-shadow:0 0 0 4px rgba(255,210,31,.12)}
+.ck.run .badge{background:var(--yellow);color:#0d0f12}
+.ck.run .res{background:rgba(255,210,31,.12);color:var(--yellow)}
+.ck.pass{border-color:rgba(61,220,151,.55)}
+.ck.pass .badge{background:var(--green);color:#0d0f12}
+.ck.pass .badge span{display:none}.ck.pass .badge svg{display:block}
+.ck.pass .res{background:rgba(61,220,151,.14);color:var(--green)}
+.ck.pass .res .dot{display:none}
+/* ---------- notes doc ---------- */
+.notesgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;margin-top:18px;align-items:start}
+@media(max-width:860px){.notesgrid{grid-template-columns:1fr}}
+.doc{background:#f9f7f4;color:#1b1b1f;border-radius:18px;padding:22px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.doc .fname{display:flex;align-items:center;gap:8px;font:700 13px ui-monospace,Menlo,monospace;color:#652bd6;margin-bottom:12px}
+.doc .fname svg{width:18px;height:18px;color:#652bd6}
+.sec{border-left:4px solid var(--c);padding:6px 0 6px 12px;margin-top:12px;cursor:pointer;border-radius:4px;}
+.sec:hover,.sec.on{background:#efe9ff}
+.sec .h{font-weight:700;font-size:15px}
+.sec .l{font:12.5px/1.5 ui-monospace,Menlo,monospace;color:#3d3d46;margin-top:2px;overflow-wrap:anywhere}
+.why{display:grid;gap:12px}
+.why .w{background:var(--surface);border:1px solid var(--surface2);border-radius:14px;padding:14px}
+.why .w b{display:block}
+.why .w span{color:var(--mute);font-size:14px}
+
+/* ---------- hand-off ---------- */
+.hand{display:grid;grid-template-columns:minmax(0,1fr) 60px minmax(0,1.6fr);gap:14px;align-items:center;margin-top:18px}
+@media(max-width:760px){.hand{grid-template-columns:1fr}.hand .arrow{transform:rotate(90deg);justify-self:center}}
+.from2{display:grid;gap:12px}
+.box{background:var(--surface);border:1px solid var(--surface2);border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center}
+.box .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none}
+.box .ic svg{width:24px;height:24px;color:#fff}
+.box b{display:block}.box span{color:var(--mute);font-size:13px}
+.arrow{display:grid;place-items:center}
+.arrow svg{width:46px;height:46px;color:var(--soft)}
+.tools{display:grid;gap:12px}
+.tool{background:linear-gradient(160deg,#2a1d55,#1c1438);border:1px solid #4a3a8a;border-radius:16px;padding:14px;display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center}
+.tool .ic{width:42px;height:42px;border-radius:12px;background:var(--brand);display:grid;place-items:center}
+.tool .ic svg{width:24px;height:24px;color:#fff}
+.tool code{color:var(--soft);font-weight:700}
+.tool span{display:block;color:#d6d6d6;font-size:14px}
+.tool .uses{color:var(--yellow);font-size:12px;font-weight:700}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3 3 7 3s7-1.3 7-3"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.5A3.3 3.3 0 0 0 7 18z"/></symbol>
+  <symbol id="i-csv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h1M12 13h1M15 13h1M9 17h1M12 17h1M15 17h1"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 10l9-6 9 6v10H3z"/><path d="M7 20v-6h10v6M7 17h10"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6"/><circle cx="12" cy="3.5" r="1"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></symbol>
+ </defs>
+</svg>
+
+<header class="band" style="padding-bottom:0">
+ <div class="wrap">
+  <span class="pill">ConsoleFlare · Data setup</span>
+  <h1 style="margin-top:14px">From four messy sources to <span>one tidy warehouse</span></h1>
+  <p class="lead">Before the agent can answer anything, the data has to be collected, cleaned, checked and described. This is the foundation the tools were built on.</p>
+ </div>
+</header>
+
+<!-- =============== FUNNEL =============== -->
+<section class="band" style="padding-top:0">
+ <div class="wrap">
+  <div class="stage" id="stage">
+   <div class="rowlab">① SOURCES <span>where the company keeps its data</span></div>
+   <div class="sources">
+    <div class="src" style="--c:var(--sql)" data-src="sql">
+     <div class="hd"><div class="bub"><svg><use href="#i-db"/></svg></div><div><b>SQL database</b><div class="fn">sales.db</div></div></div>
+     <div class="chips"><span class="tchip">customers</span><span class="tchip">products</span><span class="tchip">sellers</span><span class="tchip">orders</span><span class="tchip">order_items</span><span class="tchip">payments</span></div>
+    </div>
+    <div class="src" style="--c:var(--xls)" data-src="xls">
+     <div class="hd"><div class="bub"><svg><use href="#i-sheet"/></svg></div><div><b>Excel</b><div class="fn">targets_2018.xlsx</div></div></div>
+     <div class="chips"><span class="tchip">Monthly_Targets</span><span class="tchip">Region_Map</span></div>
+    </div>
+    <div class="src" style="--c:var(--gs)" data-src="gs">
+     <div class="hd"><div class="bub"><svg><use href="#i-cloud"/></svg></div><div><b>Google Sheet</b><div class="fn">live CSV link</div></div></div>
+     <div class="chips"><span class="tchip">promo calendar</span></div>
+    </div>
+    <div class="src" style="--c:var(--csv)" data-src="csv">
+     <div class="hd"><div class="bub"><svg><use href="#i-csv"/></svg></div><div><b>CSV export</b><div class="fn">order_reviews.csv</div></div></div>
+     <div class="chips"><span class="tchip">reviews</span></div>
+    </div>
+   </div>
+
+   <div class="pipe"><i></i></div>
+   <div class="rowlab" style="justify-content:center">② LOADER <span>one Python script does the work</span></div>
+   <div class="machine" id="machine">
+    <div class="top"><div class="gear"><svg><use href="#i-gear"/></svg></div><div><h3>loader.py</h3><div class="mono" style="color:var(--soft)">python loader.py</div></div></div>
+    <div class="mst">
+     <div class="ms" id="ms1"><div class="k">1 · Read</div><div class="v">pandas reads every source into a table</div><div class="datefix"><span class="ok">read_sql</span><span class="ok">read_excel</span><span class="ok">read_csv</span></div></div>
+     <div class="ms" id="ms2"><div class="k">2 · Fix dates</div><div class="v">text becomes real dates</div><div class="datefix"><span class="bad">"15/03/2018"</span>→<span class="ok">2018-03-15</span></div></div>
+     <div class="ms" id="ms3"><div class="k">3 · Save</div><div class="v">every table into one file</div><div class="datefix"><span class="ok">CREATE OR REPLACE TABLE</span></div></div>
+    </div>
+   </div>
+   <div class="pipe"><i></i></div>
+
+   <div class="rowlab" style="justify-content:center">③ WAREHOUSE <span>what the agent will see</span></div>
+   <div class="wh">
+    <div class="hd"><div class="ic"><svg><use href="#i-ware"/></svg></div><div><h3>warehouse.duckdb</h3><div class="mono" style="color:#8ea6cf">10 tables · one file</div></div>
+     <div class="lock"><svg><use href="#i-lock"/></svg>read-only for the agent</div></div>
+    <div class="tiles" id="tiles"><div class="tile full" style="--c:#2f6fde"><div class="nm">customers</div><div class="rows">2,000</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#2f6fde"><div class="nm">products</div><div class="rows">120</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#2f6fde"><div class="nm">sellers</div><div class="rows">40</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#2f6fde"><div class="nm">orders</div><div class="rows">5,804</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#2f6fde"><div class="nm">order_items</div><div class="rows">9,738</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#2f6fde"><div class="nm">payments</div><div class="rows">5,939</div><div class="from">from SQL</div></div><div class="tile full" style="--c:#1d6f42"><div class="nm">targets</div><div class="rows">479</div><div class="from">from Excel</div></div><div class="tile full" style="--c:#1d6f42"><div class="nm">region_map</div><div class="rows">13</div><div class="from">from Excel</div></div><div class="tile full" style="--c:#0f9d58"><div class="nm">promos</div><div class="rows">10</div><div class="from">from Google Sheet</div></div><div class="tile full" style="--c:#6b7280"><div class="nm">reviews</div><div class="rows">4,995</div><div class="from">from CSV</div></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- =============== CHECKS =============== -->
+<section class="band" style="padding-top:0">
+ <div class="wrap">
+  <h2>④ Check before trusting it</h2>
+  <p class="sub">Four quick checks we ran by hand. If they pass, the agent will be working on solid ground.</p>
+  <div class="checks" id="checks">
+   <div class="ck pass" data-res="10 tables found"><div class="top"><div class="badge"><span>1</span><svg><use href="#i-check"/></svg></div><div class="q">All 10 tables are there</div></div>
+<pre>SHOW TABLES</pre><div class="res"><span class="dot"></span><span class="rt">✓ 10 tables found</span></div></div>
+   <div class="ck pass" data-res="TIMESTAMP, not text"><div class="top"><div class="badge"><span>2</span><svg><use href="#i-check"/></svg></div><div class="q">Dates are real dates</div></div>
+<pre>DESCRIBE orders</pre><div class="res"><span class="dot"></span><span class="rt">✓ TIMESTAMP, not text</span></div></div>
+   <div class="ck pass" data-res="June NE: 30.8k vs 37.1k"><div class="top"><div class="badge"><span>3</span><svg><use href="#i-check"/></svg></div><div class="q">Sources join together</div></div>
+<pre>sales JOIN targets
+  ON month + region</pre><div class="res"><span class="dot"></span><span class="rt">✓ June NE: 30.8k vs 37.1k</span></div></div>
+   <div class="ck pass" data-res="DELETE refused"><div class="top"><div class="badge"><span>4</span><svg><use href="#i-check"/></svg></div><div class="q">Nothing can be changed</div></div>
+<pre>read_only=True
+DELETE FROM orders</pre><div class="res"><span class="dot"></span><span class="rt">✓ DELETE refused</span></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- =============== NOTES =============== -->
+<section class="band" style="padding-top:0">
+ <div class="wrap">
+  <h2>⑤ Describe the data for the agent</h2>
+  <p class="sub">Code can see tables and columns. Only a person knows what they mean. That knowledge goes into one file.</p>
+  <div class="notesgrid">
+   <div class="doc">
+    <div class="fname"><svg><use href="#i-doc"/></svg>data_notes.md</div>
+    <div class="sec" style="--c:#2f6fde"><div class="h">Tables</div><div class="l">orders · order_items · customers · targets · promos · reviews …</div></div>
+    <div class="sec" style="--c:#0f9d58"><div class="h">Column values</div><div class="l">order_status = delivered | shipped | canceled<br>targets.month = '2018-06'</div></div>
+    <div class="sec" style="--c:#7833fe"><div class="h">How tables join</div><div class="l">customers.customer_state = region_map.state</div></div>
+    <div class="sec" style="--c:#e9b800"><div class="h">Business definitions</div><div class="l">revenue = SUM(price) of delivered orders<br>"last month" = August 2018</div></div>
+    <div class="sec" style="--c:#ff5a4e"><div class="h">Known data problems</div><div class="l">September 2018 is incomplete<br>50 orders have two reviews</div></div>
+   </div>
+   <div class="why">
+    <div class="w"><b>Without it</b><span>the agent sees columns but guesses what "revenue" means.</span></div>
+    <div class="w"><b>With it</b><span>every answer uses the same definitions and warns about known problems.</span></div>
+    <div class="w"><b>Where it goes</b><span>into the agent's system prompt, so it applies to every question.</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- =============== HAND-OFF =============== -->
+<section class="band" style="padding-top:0">
+ <div class="wrap">
+  <h2>⑥ How this becomes the tools</h2>
+  <p class="sub">Everything the agent can do with data is built on top of this setup.</p>
+  <div class="hand">
+   <div class="from2">
+    <div class="box"><div class="ic" style="background:#2f6fde"><svg><use href="#i-ware"/></svg></div><div><b>warehouse.duckdb</b><span>the 10 tables</span></div></div>
+    <div class="box"><div class="ic" style="background:#7833fe"><svg><use href="#i-doc"/></svg></div><div><b>data_notes.md</b><span>what the data means</span></div></div>
+   </div>
+   <div class="arrow"><svg><use href="#i-arrow"/></svg></div>
+   <div class="tools">
+    <div class="tool"><div class="ic"><svg><use href="#i-list"/></svg></div><div><code>list_tables()</code><span>shows what data exists</span><div class="uses">uses SHOW TABLES</div></div></div>
+    <div class="tool"><div class="ic"><svg><use href="#i-book"/></svg></div><div><code>get_schema(table)</code><span>shows columns + 3 sample rows</span><div class="uses">uses DESCRIBE + LIMIT 3</div></div></div>
+    <div class="tool"><div class="ic"><svg><use href="#i-code"/></svg></div><div><code>run_sql(query)</code><span>runs checked SELECT queries</span><div class="uses">uses the read-only connection</div></div></div>
+    <div class="tool" style="background:linear-gradient(160deg,#3a3005,#211b03);border-color:#6b5a10"><div class="ic" style="background:#ffd21f"><svg style="color:#0d0f12"><use href="#i-bot"/></svg></div><div><code style="color:#ffd21f">agent.py</code><span>reads data_notes.md into the system prompt</span></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+</body>
+</html>

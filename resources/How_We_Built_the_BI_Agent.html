@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How We Built the BI Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a build diary for students, short and encouraging.
+   IDEA: building a tower - every step is a block resting on the one before.
+   PICTURE: a stacked tower of 10 clickable blocks (data base, agent middle, app top) + a detail card.
+   COLOUR and TYPE: ConsoleFlare - near-black, purple, yellow; phases blue/purple/yellow; DM Sans.
+   LAYOUT: hero, tower + detail side by side (stacked on phones), phase summary, lessons. */
+:root{color-scheme:dark;--bg:#0d0f12;--ink:#fff;--mute:#a7a7a7;--brand:#7833fe;--soft:#c7aaff;--yellow:#ffd21f;--surface:#1a1a1a;--surface2:#2a2a2a;--blue:#2f6fde;--green:#3ddc97}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "DM Sans",Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h1,h2,h3{font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,4.6vw,52px);max-width:18ch}
+h1 span{color:var(--soft)}
+h2{font-size:clamp(24px,2.8vw,32px)}
+p{max-width:68ch;margin:0}
+.lead{color:var(--mute);font-size:17px;margin-top:14px}
+.pill{display:inline-block;background:var(--yellow);color:#0d0f12;font-weight:700;font-size:13px;padding:4px 12px;border-radius:999px}
+.ic{width:24px;height:24px;flex:none}
+
+/* layout */
+.builder{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start;margin-top:26px}
+@media(max-width:860px){.builder{grid-template-columns:1fr}}
+
+/* tower */
+.towerbox{background:#121418;border:1px solid var(--surface2);border-radius:20px;padding:20px 18px 16px}
+.tower{display:flex;flex-direction:column-reverse;gap:6px;align-items:center}
+.blk{--w:100%;width:var(--w);display:flex;align-items:center;gap:12px;border:0;border-radius:12px;padding:10px 14px;min-height:50px;cursor:pointer;color:#fff;text-align:left;font:inherit;position:relative;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12);transition:transform .2s, filter .2s, opacity .3s}
+.blk .n{font-weight:700;font-size:13px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.25);flex:none}
+.blk .tt{font-weight:700;font-size:15px;line-height:1.2;flex:1}
+.blk .ff{font:12px ui-monospace,Menlo,monospace;opacity:.85;white-space:nowrap}
+.blk.p1{background:linear-gradient(180deg,#3a7ef0,#2556b8)}
+.blk.p2{background:linear-gradient(180deg,#8a4dff,#5d23cf)}
+.blk.p3{background:linear-gradient(180deg,#ffdf4d,#e9b800);color:#0d0f12}
+.blk.p3 .n{background:rgba(0,0,0,.12)}
+.blk:hover{filter:brightness(1.12)}
+.blk:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.blk.cur{transform:scale(1.03);outline:3px solid #fff;outline-offset:2px}
+.blk.hidden{opacity:0;transform:translateY(-36px);pointer-events:none}
+.blk.drop{animation:drop .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes drop{0%{opacity:0;transform:translateY(-60px)}100%{opacity:1;transform:none}}
+.ground{height:10px;width:100%;margin:8px auto 0;border-radius:6px;background:#262a31}
+.phaselegend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:13px;color:var(--mute)}
+.phaselegend b{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ctrls{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.btn{font:700 15px "DM Sans",sans-serif;border-radius:999px;min-height:46px;padding:0 20px;border:1px solid var(--surface2);background:var(--surface);color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.main{background:var(--brand);border-color:var(--brand)}
+.btn:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.btn svg{width:18px;height:18px}
+
+/* detail card */
+.detail{background:var(--surface);border:1px solid var(--surface2);border-radius:20px;padding:22px;position:sticky;top:16px}
+.dh{display:flex;align-items:center;gap:14px}
+.dh .big{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;flex:none}
+.dh .big svg{width:30px;height:30px}
+.dh .stepno{color:var(--yellow);font-weight:700;font-size:13px}
+.dh h3{font-size:clamp(22px,2.4vw,28px)}
+.phase{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-top:4px}
+.did{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.did li{display:flex;gap:10px;align-items:flex-start;background:#121418;border-radius:12px;padding:10px 12px;font-size:15px}
+.did li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--soft);flex:none;margin-top:8px}
+.row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:start;margin-top:14px;font-size:15px}
+.row .k{color:var(--mute);font-size:13px;font-weight:700;padding-top:4px}
+.chip{display:inline-block;font:13px ui-monospace,Menlo,monospace;background:#2a2340;color:var(--soft);border-radius:8px;padding:4px 8px;margin:0 6px 6px 0;overflow-wrap:anywhere}
+.cmd{display:block;font:13.5px ui-monospace,Menlo,monospace;background:#0b0d0f;border:1px solid var(--surface2);border-radius:10px;padding:10px 12px;color:#e6e6e6;overflow-x:auto;white-space:pre}
+.check{color:var(--green);font-weight:700}
+.lesson{margin-top:18px;background:linear-gradient(90deg,rgba(255,210,31,.14),rgba(255,210,31,.03));border-left:4px solid var(--yellow);border-radius:10px;padding:12px 14px;font-weight:700}
+.lesson small{display:block;color:var(--yellow);font-size:12px;margin-bottom:2px}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+
+/* phase summary */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-top:18px}
+.pc{border-radius:18px;padding:20px;position:relative;overflow:hidden}
+.pc.p1{background:linear-gradient(160deg,#1c3566,#132242)}
+.pc.p2{background:linear-gradient(160deg,#3a1f80,#231349)}
+.pc.p3{background:linear-gradient(160deg,#5e4b06,#2e2604)}
+.pc h3{font-size:20px;margin-bottom:4px}
+.pc .steps{color:#dcdcdc;font-size:14px;margin-bottom:10px}
+.pc .icons{display:flex;gap:8px;margin-top:12px}
+.pc .icons span{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:grid;place-items:center}
+.pc .icons svg{width:22px;height:22px}
+.pc p{color:#e4e4e4;font-size:15px}
+@media(max-width:600px){.blk .ff{display:none}.blk{--w:100% !important;width:calc(var(--w) - var(--k)*1.6%)}.blk .tt{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.blk.drop{animation:none}.blk{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+  <symbol id="i-stack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></symbol>
+  <symbol id="i-funnel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9 17h6"/><circle cx="12" cy="3.5" r="1"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3c4 2 6 6 5 11l-3 3h-4l-3-3c-1-5 1-9 5-11z"/><circle cx="12" cy="10" r="2"/><path d="M8 17l-2 4 4-2M16 17l2 4-4-2"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l11 7-11 7z"/></symbol>
+ </defs>
+</svg>
+
+<header class="band" style="padding-bottom:0">
+ <div class="wrap">
+  <span class="pill">ConsoleFlare · Build diary</span>
+  <h1 style="margin-top:14px">How we built the <span>BI Agent</span>, block by block</h1>
+  <p class="lead">Ten steps, each resting on the one before. Click any block to see what we did, the file, the command and how we checked it.</p>
+ </div>
+</header>
+
+<section class="band" style="padding-top:0">
+ <div class="wrap builder">
+  <div class="towerbox">
+   <div class="tower" id="tower"></div>
+   <div class="ground"></div>
+   <div class="phaselegend"><span><b style="background:#2f6fde"></b>Data foundation</span><span><b style="background:#7833fe"></b>Agent brain</span><span><b style="background:#ffd21f"></b>App on top</span></div>
+   <div class="ctrls">
+    <button class="btn main" id="build"><svg aria-hidden="true"><use href="#i-play"/></svg>Build it</button>
+   </div>
+  </div>
+
+  <article class="detail" id="detail" aria-live="polite">
+   <div class="dh">
+    <div class="big" id="dIcon"><svg aria-hidden="true"><use id="dUse" href="#i-gear"/></svg></div>
+    <div><div class="stepno" id="dNo"></div><h3 id="dTitle"></h3><span class="phase" id="dPhase"></span></div>
+   </div>
+   <ul class="did" id="dDid"></ul>
+   <div class="row"><div class="k">Files</div><div id="dFiles"></div></div>
+   <div class="row"><div class="k">Run</div><div><code class="cmd" id="dRun"></code></div></div>
+   <div class="row"><div class="k">Done when</div><div class="check" id="dCheck"></div></div>
+   <div class="lesson"><small>Lesson</small><span id="dLesson"></span></div>
+   <div class="nav2">
+    <button class="btn" id="prev">← Previous</button>
+    <button class="btn" id="next">Next →</button>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="band" style="padding-top:0">
+ <div class="wrap">
+  <h2>Three layers, one tower</h2>
+  <div class="phases">
+   <div class="pc p1"><h3>1 · Data foundation</h3><div class="steps">Steps 1–5</div><p>Get four sources into one read-only database, check it, and describe it so the agent understands it.</p>
+    <div class="icons"><span><svg><use href="#i-gear"/></svg></span><span><svg><use href="#i-stack"/></svg></span><span><svg><use href="#i-funnel"/></svg></span><span><svg><use href="#i-search"/></svg></span><span><svg><use href="#i-doc"/></svg></span></div></div>
+   <div class="pc p2"><h3>2 · Agent brain</h3><div class="steps">Steps 6–7</div><p>Give the agent three safe tools, then connect them to the LLM with a clear system prompt.</p>
+    <div class="icons"><span><svg><use href="#i-code"/></svg></span><span><svg><use href="#i-bot"/></svg></span></div></div>
+   <div class="pc p3"><h3>3 · App on top</h3><div class="steps">Steps 8–10</div><p>Wrap it in a branded chat app with memory and history, then put it online.</p>
+    <div class="icons"><span><svg><use href="#i-chat"/></svg></span><span><svg><use href="#i-clock"/></svg></span><span><svg><use href="#i-rocket"/></svg></span></div></div>
+  </div>
+ </div>
+</section>
+
+<script>
+{
+const STEPS = [
+ {p:1,icon:"i-gear",title:"Set up the project",file:"check_setup.py",
+  did:["Virtual environment + requirements.txt","Groq API key saved in .env","One script to test every library and the LLM"],
+  files:["requirements.txt",".env","check_setup.py"],run:"python check_setup.py",check:"All checks print, and the LLM replies \"ready\"",
+  lesson:"Test the setup before writing any agent code."},
+ {p:1,icon:"i-stack",title:"Prepare 4 data sources",file:"data/",
+  did:["SQL database: orders, customers, products, sellers, payments","Excel: monthly targets + region map","Google Sheet: promo calendar (live link) · CSV: reviews","A few data problems planted on purpose"],
+  files:["sales.db","targets_2018.xlsx","promo sheet","order_reviews.csv"],run:"(open each source once)",check:"Every source opens and has rows",
+  lesson:"Realistic data with real problems makes a better test."},
+ {p:1,icon:"i-funnel",title:"Load into DuckDB",file:"loader.py",
+  did:["pandas reads all 4 sources","Text dates turned into real dates","10 tables saved into one warehouse.duckdb"],
+  files:["loader.py","warehouse.duckdb"],run:"python loader.py",check:"10 tables printed with row counts",
+  lesson:"The loader fixes format. The agent explains business problems."},
+ {p:1,icon:"i-search",title:"Check the data",file:"quick checks",
+  did:["SHOW TABLES and 5 sample rows","One query joining sales (SQL) with targets (Excel)","DELETE tried in read-only mode: refused"],
+  files:["warehouse.duckdb"],run:"duckdb.connect(path, read_only=True)",check:"Joins work, and writes are refused",
+  lesson:"If you can write the query, the agent can too."},
+ {p:1,icon:"i-doc",title:"Describe the data",file:"data_notes.md",
+  did:["Every table and its columns","How tables join (state → region)","Business rules: revenue = delivered orders only","Known data problems the agent must mention"],
+  files:["data_notes.md"],run:"(plain text, no code)",check:"A new analyst could understand the data from it",
+  lesson:"The agent is only as good as its data notes."},
+ {p:2,icon:"i-code",title:"Build 3 tools",file:"tools.py",
+  did:["list_tables(): what data exists","get_schema(): columns + 3 sample rows","run_sql(): SELECT only, LIMIT 200, read-only, errors returned as text"],
+  files:["tools.py"],run:"run_sql.invoke({\"query\": \"DELETE FROM orders\"})",check:"DELETE → BLOCKED, wrong column → ERROR, normal query → rows",
+  lesson:"Never trust generated SQL. Check it, then limit it."},
+ {p:2,icon:"i-bot",title:"Build the agent",file:"agent.py",
+  did:["ChatGroq LLM, temperature 0","System prompt + data notes + scope rule","create_agent joins the LLM and the 3 tools"],
+  files:["agent.py"],run:"python agent.py",check:"Trace: list_tables → get_schema → run_sql → answer",
+  lesson:"Tune behaviour in the prompt, not the code."},
+ {p:3,icon:"i-chat",title:"Chat app in Streamlit",file:"app.py",
+  did:["Chat screen with a Show SQL panel","Example questions to click","ConsoleFlare theme + English/Hinglish switch"],
+  files:["app.py",".streamlit/config.toml","assets/logo"],run:"streamlit run app.py",check:"A question is answered in the browser",
+  lesson:"Streamlit reruns the file on every click, so session_state keeps the chat."},
+ {p:3,icon:"i-clock",title:"Memory + chat history",file:"memory.db · chats.json",
+  did:["Checkpointer + thread_id: follow-up questions work","memory.db keeps agent memory after restarts","chats.json shows previous chats in the sidebar"],
+  files:["memory.db","chats.json"],run:"(automatic while chatting)",check:"\"How are sales?\" → asks back → your reply continues it",
+  lesson:"Same thread_id = same conversation."},
+ {p:3,icon:"i-rocket",title:"Deploy online",file:"GitHub → Streamlit",
+  did:["Code pushed to GitHub","App deployed on Streamlit Cloud","Groq key + sheet link stored as secrets","Warehouse rebuilt automatically on start"],
+  files:["requirements.txt",".gitignore","Secrets"],run:"git push",check:"The live link answers, and off-topic questions are refused",
+  lesson:"Secrets never go into code or GitHub."}
+];
+const PH = {1:["Data foundation","#2f6fde","#fff"],2:["Agent brain","#7833fe","#fff"],3:["App on top","#ffd21f","#0d0f12"]};
+const $ = id => document.getElementById(id);
+const tower=$("tower"), reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let cur=0, timer=null, played=false;
+
+tower.innerHTML = STEPS.map((s,k)=>`<button class="blk p${s.p}" data-i="${k}" style="--w:${100-k*3.2}%;--k:${k}" aria-label="Step ${k+1}: ${s.title}">
+  <span class="n">${k+1}</span><svg class="ic" aria-hidden="true"><use href="#${s.icon}"/></svg><span class="tt">${s.title}</span><span class="ff">${s.file}</span></button>`).join("");
+const blocks=[...tower.children];
+
+function esc(t){return t.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function show(k){
+  cur=k; const s=STEPS[k], ph=PH[s.p];
+  blocks.forEach((b,j)=>b.classList.toggle("cur",j===k));
+  $("dNo").textContent=`Step ${k+1} of ${STEPS.length}`;
+  $("dTitle").textContent=s.title;
+  $("dPhase").textContent=ph[0]; $("dPhase").style.background=ph[1]; $("dPhase").style.color=ph[2];
+  $("dIcon").style.background=ph[1]; $("dIcon").style.color=ph[2]; $("dUse").setAttribute("href","#"+s.icon);
+  $("dDid").innerHTML=s.did.map(d=>`<li>${esc(d)}</li>`).join("");
+  $("dFiles").innerHTML=s.files.map(f=>`<span class="chip">${esc(f)}</span>`).join("");
+  $("dRun").textContent=s.run; $("dCheck").textContent="✓ "+s.check; $("dLesson").textContent=s.lesson;
+  $("prev").disabled=k===0; $("next").disabled=k===STEPS.length-1;
+}
+function build(){
+  clearTimeout(timer); played=true;
+  if(reduce){blocks.forEach(b=>b.classList.remove("hidden"));show(0);return;}
+  blocks.forEach(b=>b.classList.add("hidden"));
+  let k=0;
+  const stepIn=()=>{ const b=blocks[k]; b.classList.remove("hidden"); b.classList.remove("drop"); void b.offsetWidth; b.classList.add("drop"); show(k);
+    k++; if(k<blocks.length) timer=setTimeout(stepIn,1100); };
+  timer=setTimeout(stepIn,200);
+}
+tower.addEventListener("click",e=>{const b=e.target.closest(".blk"); if(!b) return; clearTimeout(timer); blocks.forEach(x=>x.classList.remove("hidden")); show(+b.dataset.i); if(innerWidth<=860) $("detail").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});});
+$("build").addEventListener("click",build);
+$("prev").addEventListener("click",()=>{clearTimeout(timer);blocks.forEach(x=>x.classList.remove("hidden"));show(Math.max(0,cur-1));});
+$("next").addEventListener("click",()=>{clearTimeout(timer);blocks.forEach(x=>x.classList.remove("hidden"));show(Math.min(STEPS.length-1,cur+1));});
+show(0);
+const io=new IntersectionObserver(es=>{ if(es[0].isIntersecting && !played) build(); },{threshold:.3});
+io.observe(tower);
+}
+</script>
+</body>
+</html>
