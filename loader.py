@@ -1,9 +1,14 @@
 # loader.py - copy all 4 sources into one DuckDB file
 # Run: python loader.py
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 import sqlite3
 import duckdb
 import pandas as pd
+
 
 # ---- 1. Read the 4 sources ----
 
@@ -22,7 +27,8 @@ targets    = pd.read_excel("data/excel/targets_2018.xlsx", sheet_name="Monthly_T
 region_map = pd.read_excel("data/excel/targets_2018.xlsx", sheet_name="Region_Map")
 
 # Source 3: Google Sheet (local CSV copy for now)
-promos = pd.read_csv("data/google_sheets/promo_calendar.csv")
+# promos = pd.read_csv("data/google_sheets/promo_calendar.csv")
+promos = pd.read_csv(os.getenv("PROMO_SHEET_URL"))
 
 # Source 4: CSV
 reviews = pd.read_csv("data/csv/order_reviews.csv")
